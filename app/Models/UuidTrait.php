@@ -14,22 +14,5 @@ use Ramsey\Uuid\Uuid;
 
 trait UuidTrait
 {
-
-    /**
-     * Generates UUID if doesn't exist in entry
-     *
-     * returns @string
-     */
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model)
-        {
-            if (!isset($model->attributes['id'])) {
-                $model->attributes['id'] = Uuid::uuid4();
-            } else {
-                $model->{$model->getKeyName()} = $model->attributes['id'];
-            }
-        });
-    }
+//TODO  uudi export to trait
 }
