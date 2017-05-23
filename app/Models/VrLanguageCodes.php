@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class VrLanguageCodes extends Model
+class VrLanguageCodes extends CoreModel
 {
-    use CoreTrait;
+    use UuidTrait;
 
     /**
      * Database table name

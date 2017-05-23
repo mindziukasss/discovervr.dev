@@ -1,18 +1,18 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: CodeAcademy
- * Date: 5/23/2017
- * Time: 11:14 AM
+ * User: agnė
+ * Date: 5/23/17
+ * Time: 3:08 PM
  */
 
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Ramsey\Uuid\Uuid;
 
-trait CoreTrait
+class CoreModel extends Model
 {
     use SoftDeletes;
 

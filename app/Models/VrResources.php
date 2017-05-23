@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class VrResources extends Model
+
+class VrResources extends CoreModel
 {
-    use CoreTrait;
+    use UuidTrait;
 
     /**
      * Database table name

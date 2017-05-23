@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class VrReservations extends Model
+
+class VrReservations extends CoreModel
 {
-    use CoreTrait;
+    use UuidTrait;
 
     /**
      * Database table name
