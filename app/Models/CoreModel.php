@@ -15,8 +15,19 @@ use Ramsey\Uuid\Uuid;
 trait CoreModel
 {
     use SoftDeletes;
+
+    /**
+     * Disables auto-increment
+     *
+     * @var bool
+     */
     public $incrementing = false;
 
+    /**
+     * Generates UUID if doesn't exist in entry
+     *
+     * returns @string
+     */
     protected static function boot()
     {
         parent::boot();
