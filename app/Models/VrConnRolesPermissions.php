@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VrConnRolesPermissions extends Model
 {
+    protected $updated_at = false;
     /**
      * $table name DataBases
      */

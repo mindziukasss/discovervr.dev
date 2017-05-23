@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VrRoles extends Model
 {
+    use CoreTrait;
     /**
      * $table name DataBases
      */
