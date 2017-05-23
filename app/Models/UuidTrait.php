@@ -14,7 +14,5 @@ use Ramsey\Uuid\Uuid;
 
 trait UuidTrait
 {
-
 //TODO  uudi export to trait
-
 }

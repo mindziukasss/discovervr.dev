@@ -1,14 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: agnė
- * Date: 5/23/17
- * Time: 3:08 PM
- */
-
-namespace App\Models;
-
-
+namespace App\Models;  
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
