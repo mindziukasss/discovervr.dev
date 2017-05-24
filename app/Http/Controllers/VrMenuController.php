@@ -15,6 +15,9 @@ class VrMenuController extends Controller {
 	public function index()
 	{
 		$config['menu'] = VrMenu::get()->toArray();
+		$config['create'] = 'app.menu.create';
+        $config['edit'] = 'app.menu.edit';
+		$config['delete'] = 'app.menu.destroy';
 
 		return view('admin.menu.index', $config);
 	}
@@ -75,7 +78,10 @@ class VrMenuController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$config['route'] = route('app.menu.edit',$id);
+		$config['menu'] = VrMenu::find($id)->toArray();
+		
+		return view('admin.menu.edit', $config);
 	}
 
 	/**
@@ -87,7 +93,16 @@ class VrMenuController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$config = VrMenu::find($id);
+		$data = request()->all();
+
+		$config->update(array(
+		'name' => $data['name'],
+		'url' => $data['url'],
+		'sequence' => $data['sequence'],
+		));
+
+		return redirect()->route('app.menu.index', $config);
 	}
 
 	/**
@@ -99,7 +114,10 @@ class VrMenuController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+
+		if (VrMenu::destroy($id)){
+            return ["success" => true, "id" => $id];
+        }
 	}
 
 }
