@@ -1,5 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
 
+use App\Models\VrMenu;
 use Illuminate\Routing\Controller;
 
 class VrMenuController extends Controller {
@@ -12,7 +14,9 @@ class VrMenuController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$config['menu'] = VrMenu::get()->toArray();
+
+		return view('admin.menu.index', $config);
 	}
 
 	/**
@@ -23,7 +27,10 @@ class VrMenuController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$config['menu'] = VrMenu::all();
+		$config['route'] = 'app.menu.create';
+
+		return view('admin.menu.create', $config);
 	}
 
 	/**
@@ -34,7 +41,17 @@ class VrMenuController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$config['menu'] = VrMenu::all();
+		$data = request()->all();
+
+		VrMenu::create(array(
+		'name' => $data['name'],
+		'url' => $data['url'],
+		'sequence' => $data['sequence'],
+		));
+
+		return redirect()->route('app.menu.index', $config);
+
 	}
 
 	/**
