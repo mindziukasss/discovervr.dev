@@ -1,10 +1,9 @@
 <?php 
 namespace App\Http\Controllers;
 
-use App\Models\VrMenu;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
+use App\Models\VrMenu;
 
 
 class VrMenuController extends Controller {
@@ -49,17 +48,14 @@ class VrMenuController extends Controller {
 
     public function store(Request $request)
     {
-
         $this->validate($request, [
-            'name'       => 'required|string|max:2|unique:vr_menu',
+            'name' => 'required|string|max:255|unique:vr_menu',
             'url' => 'required|string|max:255|unique:vr_menu',
             'sequence' => 'required|digits:1|unique:vr_menu',
         ]);
 
-
         $config['menu'] = VrMenu::all();
         $data = request()->all();
-
 
         VrMenu::create(array(
 		'name' => $data['name'],
