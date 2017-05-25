@@ -14,7 +14,7 @@ class VrMenuController extends Controller {
 	 */
 	public function index()
 	{
-		$config['menu'] = VrMenu::get()->toArray();
+		$config['menu'] = VrMenu::orderBy('sequence', 'asc')->get();
 		$config['create'] = 'app.menu.create';
         $config['edit'] = 'app.menu.edit';
 		$config['delete'] = 'app.menu.destroy';
@@ -46,6 +46,8 @@ class VrMenuController extends Controller {
 	{
 		$config['menu'] = VrMenu::all();
 		$data = request()->all();
+
+		//TODO validations sequence, name, url
 
 		VrMenu::create(array(
 		'name' => $data['name'],
