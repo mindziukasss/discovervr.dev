@@ -18,8 +18,6 @@
 
 </div>
 
-
-
 {!! Form::close() !!}
 
 @endsection

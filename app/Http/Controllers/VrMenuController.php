@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\VrMenu;
+use Session;
 
 
 class VrMenuController extends Controller {
@@ -63,7 +64,7 @@ class VrMenuController extends Controller {
 		'sequence' => $data['sequence'],
 		));
 
-//        Session::flash('success' , 'Was successfully save!');
+      	Session::flash('success' , 'Was successfully save!');
 
 		return redirect()->route('app.menu.index', $config);
 
@@ -88,7 +89,7 @@ class VrMenuController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Request $request, $id)
 	{
 		$config['route'] = route('app.menu.edit',$id);
 		$config['menu'] = VrMenu::find($id)->toArray();
@@ -103,9 +104,16 @@ class VrMenuController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request,$id)
 	{
 		$config = VrMenu::find($id);
+
+		$this->validate($request, [
+            'name' => 'required|string|max:255|unique:vr_menu',
+            'url' => 'required|string|max:255|unique:vr_menu',
+            'sequence' => 'required|digits:1|unique:vr_menu',
+        ]);
+		
 		$data = request()->all();
 
 		$config->update(array(
@@ -113,6 +121,8 @@ class VrMenuController extends Controller {
 		'url' => $data['url'],
 		'sequence' => $data['sequence'],
 		));
+
+		Session::flash('success' , 'Was successfully save!');
 
 		return redirect()->route('app.menu.index', $config);
 	}

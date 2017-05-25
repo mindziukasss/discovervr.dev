@@ -9,17 +9,17 @@ Meniu yra sie:
 
 @foreach($menu as $item)
 	<div id="{{$item['id']}}">
-     Pavadinimas: <a href = "{{$item['url']}}", target="_blank" >{{ $item ['name'] }}</a>
+        Pavadinimas: <a href = "{{$item['url']}}", target="_blank" >{{ $item ['name'] }}</a>
         Url: {{$item['url']}}
-    Pozicija: {{$item['sequence']}}
+        Pozicija: {{$item['sequence']}}
 
- <a href={{ route($edit,$item['id']) }}><button type="button">Edit</button></a>
-<button onclick="deleteItem( '{{ route($delete, $item['id']) }}' )">Delete</button></div>
+        <a href={{ route($edit,$item['id']) }}><button type="button">Edit</button></a>
+        <button onclick="deleteItem( '{{ route($delete, $item['id']) }}' )">Delete</button>
+    </div>
 
-    ////////////////
  @endforeach
 
- @endsection
+@endsection
 
 @section('scripts')
     <script>

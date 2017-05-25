@@ -1,3 +1,6 @@
+@extends('admin.menu.menu')
+
+@section('content')
 {!! Form::open(['url' => $route])!!}
 
 <div>
@@ -17,3 +20,5 @@
 
 
 {!! Form::close() !!}
+
+@endsection
