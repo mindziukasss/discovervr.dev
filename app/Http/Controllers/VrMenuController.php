@@ -2,7 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\VrMenu;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+
 
 class VrMenuController extends Controller {
 
@@ -42,18 +45,29 @@ class VrMenuController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-		$config['menu'] = VrMenu::all();
-		$data = request()->all();
 
-		//TODO validations sequence, name, url
 
-		VrMenu::create(array(
+    public function store(Request $request)
+    {
+
+        $this->validate($request, [
+            'name'       => 'required|string|max:2|unique:vr_menu',
+            'url' => 'required|string|max:255|unique:vr_menu',
+            'sequence' => 'required|digits:1|unique:vr_menu',
+        ]);
+
+
+        $config['menu'] = VrMenu::all();
+        $data = request()->all();
+
+
+        VrMenu::create(array(
 		'name' => $data['name'],
 		'url' => $data['url'],
 		'sequence' => $data['sequence'],
 		));
+
+//        Session::flash('success' , 'Was successfully save!');
 
 		return redirect()->route('app.menu.index', $config);
 
