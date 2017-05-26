@@ -41,19 +41,22 @@ class VrOrderController extends Controller {
 	public function store()
 	{
 		$data = request()->all();
-        foreach($data['time'] as $key => $value)
-        {
-            if(is_null($value) || $value == '')
-                unset($data['time'][$key]);
+		$experience = [];
+		foreach($data['room'] as $key => $room){
+		    $key = [];
+		    foreach($data[$room.'time'] as $time) {
+		        array_push($key, $data[$room.'date'] . ' ' . $time);
+            }
+		    $experience[$room] = $key;
         }
-		dd($data);
-		if(sizeOf($data['rooms']) > 0) {
+
+        if(sizeOf($experience) > 0) {
             $record = VrOrder::create([
                 'status' => 1,
             ]);
+
             $reservationTable = new VrReservationsController();
-            $reservationTable->storeFromOrder($data);
-            $record->experiences()->sync($data['rooms']);
+            $reservationTable->storeFromOrder($experience, $record);
         }
 
     }

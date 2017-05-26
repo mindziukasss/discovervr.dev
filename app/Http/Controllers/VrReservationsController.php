@@ -43,17 +43,24 @@ class VrReservationsController extends Controller {
      * Store a newly created resource in storage via VrOrdersController call
      *  POST
      *
-     * @param form data
+     * @param formdata
+     * @param order entry
      * @return void
      */
-	public function storeFromOrder($data)
+	public function storeFromOrder($experience, $record)
     {
-        
-        VrReservations::create([
-            'id' => Uuid::uuid4(),
-            'experience_id' => $data['rooms'],
-            'time' => $data['time']
-        ]);
+
+    foreach($experience as $key => $room) {
+        foreach ($room as $time) {
+            VrReservations::create([
+                'id' => Uuid::uuid4(),
+                'experience_id' => $key,
+                'time' => $time,
+                'order_id' => $record->id
+            ]);
+        }
+    }
+
     }
 
 	/**
