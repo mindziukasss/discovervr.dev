@@ -14,5 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call(VrRolesSeeder::class);
         $this->call(VrCategoriesSeeder::class);
         $this->call(VrMenuSeeder::class);
+        $this->call(VrPagesSeeder::class);
+        $this->call(VrLanguageCodesSeeder::class);
+        $this->call(VrPagesTranslationsSeeder::class);
+
     }
+
 }

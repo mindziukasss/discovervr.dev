@@ -35,5 +35,14 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/edit', ['uses' => 'VrMenuController@update']);
             Route::delete('/delete', ['as' => 'app.menu.destroy', 'uses' => 'VrMenuController@destroy']);
         });
+Route::group(['prefix' => 'orders'], function () {
+    Route::get('/', ['as' => 'app.orders.index', 'uses' => 'VrOrderController@index']);
+    Route::get('/create', ['as' => 'app.orders.create', 'uses' => 'VrOrderController@create']);
+    Route::post('/create', ['uses' => 'VrOrderController@store']);
+    Route::group(['prefix' => '{id}'], function () {
+        Route::get('/', [ 'uses' => 'VrOrderController@show']);
+        Route::get('/edit', ['as' => 'app.orders.edit', 'uses' => 'VrOrderController@edit']);
+        Route::post('/edit', ['uses' => 'VrOrderController@update']);
+        Route::delete('/delete', ['as' => 'app.orders.destroy', 'uses' => 'VrOrderController@destroy']);
     });
 });
