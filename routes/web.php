@@ -24,7 +24,7 @@ Route::group(['prefix' => 'orders'], function () {
     Route::get('/create', ['as' => 'app.orders.create', 'uses' => 'VrOrderController@create']);
     Route::post('/create', ['uses' => 'VrOrderController@store']);
     Route::group(['prefix' => '{id}'], function () {
-        Route::get('/', [ 'uses' => 'VrOrderController@show']);
+        Route::get('/', ['as' => 'app.orders.show', 'uses' => 'VrOrderController@show']);
         Route::get('/edit', ['as' => 'app.orders.edit', 'uses' => 'VrOrderController@edit']);
         Route::post('/edit', ['uses' => 'VrOrderController@update']);
         Route::delete('/delete', ['as' => 'app.orders.destroy', 'uses' => 'VrOrderController@destroy']);
