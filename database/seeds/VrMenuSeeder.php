@@ -20,6 +20,12 @@ class VrMenuSeeder extends Seeder
             ["name" => "Bilietai", "id" => "tickets", "sequence" => "4", "url" => "/tickets"],
             ["name" => "Remėjai", "id" => "sponsors", "sequence" => "5", "url" => "/sponsors"],
             ["name" => "Akcija", "id" => "stock", "sequence" => "0", "url" => "/stock"],
+            ["name" => "Plaukimas", "id" => "swiming", "sequence" => "2", "url" => "/virtual-rooms/swiming", "vr_parent_id" => "virtual-rooms"],
+            ["name" => "Zaidimas", "id" => "play", "sequence" => "2", "url" => "/virtual-rooms/play", "vr_parent_id" => "virtual-rooms" ],
+            ["name" => "Darbas", "id" => "work", "sequence" => "2", "url" => "/virtual-rooms/work", "vr_parent_id" => "virtual-rooms"],
+            ["name" => "Elektromarkt", "id" => "elektromark", "sequence" => "5", "url" => "/sponsors/elektromark", "vr_parent_id" => "sponsors" ],
+            ["name" => "Telesoft", "id" => "telesoft", "sequence" => "5", "url" => "/sponsors/telesoft", "vr_parent_id" => "sponsors" ],
+
 
 
 

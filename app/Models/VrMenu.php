@@ -17,4 +17,11 @@ class VrMenu extends CoreModel
      * @var array
      */
     protected $fillable = ['id', 'url', 'new_window', 'name', 'sequence', 'vr_parent_id'];
+
+
+
+    public function  subCategory()
+    {
+        return $this->hasMany(VrMenu::class, 'vr_parent_id');
+    }
 }
