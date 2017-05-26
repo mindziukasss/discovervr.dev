@@ -20,5 +20,5 @@ class VrLanguageCodes extends Model
      * Fillable column names
      * @var array
      */
-    protected $fillable = ['id', 'page_id', 'language_code'];
+    protected $fillable = ['id', 'language_code'];
 }

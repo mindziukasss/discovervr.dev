@@ -27,6 +27,6 @@
             @endfor
         <label>
         </label><br>
-    @endforeach
+        @endforeach
 
     {{ Form::submit('Order') }}
