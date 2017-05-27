@@ -30,3 +30,27 @@ Route::group(['prefix' => 'orders'], function () {
         Route::delete('/delete', ['as' => 'app.orders.destroy', 'uses' => 'VrOrderController@destroy']);
     });
 });
+
+Route::group(['prefix' => 'pages'], function () {
+    Route::get('/', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@index']);
+    Route::get('/create', ['as' => 'app.pages.create', 'uses' => 'VrPagesController@create']);
+    Route::post('/create', ['uses' => 'VrPagesController@store']);
+    Route::group(['prefix' => '{id}'], function () {
+        Route::get('/', ['as' => 'app.pages.show', 'uses' => 'VrPagesController@show']);
+        Route::get('/edit', ['as' => 'app.pages.edit', 'uses' => 'VrPagesController@edit']);
+        Route::post('/edit', ['uses' => 'VrPagesController@update']);
+        Route::delete('/delete', ['as' => 'app.pages.destroy', 'uses' => 'VrPagesController@destroy']);
+    });
+});
+
+Route::group(['prefix' => 'categories'], function () {
+    Route::get('/', ['as' => 'app.categories.index', 'uses' => 'VrCategoriesController@index']);
+    Route::get('/create', ['as' => 'app.categories.create', 'uses' => 'VrCategoriesController@create']);
+    Route::post('/create', ['uses' => 'VrCategoriesController@store']);
+    Route::group(['prefix' => '{id}'], function () {
+        Route::get('/', ['as' => 'app.categories.show', 'uses' => 'VrCategoriesController@show']);
+        Route::get('/edit', ['as' => 'app.categories.edit', 'uses' => 'VrCategoriesController@edit']);
+        Route::post('/edit', ['uses' => 'VrCategoriesController@update']);
+        Route::delete('/delete', ['as' => 'app.categories.destroy', 'uses' => 'VrCategoriesController@destroy']);
+    });
+});

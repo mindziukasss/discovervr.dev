@@ -1,68 +1,63 @@
 <?php namespace App\Http\Controllers;
 
 use App\Models\VrCategories;
-use App\Models\VrCategoriesTranslations;
-use App\Models\VrPages;
 use Illuminate\Routing\Controller;
+use Ramsey\Uuid\Uuid;
 
-class VrPagesController extends Controller {
+class VrCategoriesController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /vrpages
+	 * GET /vrcategories
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-	    return VrPages::with(['pagesTranslation'])->get()->toArray();
-//        $dataFromModel = new VrPages;
+	    return VrCategories::with(['categoryTranslation'])->get()->toArray();
+//        $dataFromModel = new VrCategories;
 //        $config = $this->listBladeData();
 //        $config['tableName'] = $dataFromModel->getTableName();
 //        $config['list'] = $dataFromModel->get()->toArray();
 //
-//        $config['pages'] = VrPages::get()->toArray();
+//        $config['categories'] = VrCategories::get()->toArray();
 //
-//        return view('admin.pagesList', $config);
+//        return view('admin.categoriesList', $config);
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /vrpages/create
+	 * GET /vrcategories/create
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		$config['categories'] = VrCategoriesTranslations::where('language_code', '=', 'en')->pluck('name', 'category_id');
-
-		return view ('admin.createPage', $config);
+		return view ('admin.createCategory');
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /vrpages
+	 * POST /vrcategories
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-        $resource = request()->file('image');
-        $uploadController = new VrResourcesController();
-        $data = request()->all();
-        $article = VrPages::create([
-            'category_id' => $data['categories'],
-            'cover_id' => $uploadController->upload($resource)
+	    $data = request()->all();
+        $record = VrCategories::create([
+            'id' => Uuid::uuid4(),
         ]);
-        $record = new VrPagesTranslationsController();
-        $record->storeFromVrPagesController($data, $article);
 
-        return redirect()->route('app.pages.index');
-    }
+        $translations = new VrCategoriesTranslationsController();
+        $translations->storeFromVrCategoriesController($data, $record);
+
+        return redirect()->route('app.categories.index');
+	}
 
 	/**
 	 * Display the specified resource.
-	 * GET /vrpages/{id}
+	 * GET /vrcategories/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -74,7 +69,7 @@ class VrPagesController extends Controller {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /vrpages/{id}/edit
+	 * GET /vrcategories/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -86,7 +81,7 @@ class VrPagesController extends Controller {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /vrpages/{id}
+	 * PUT /vrcategories/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -98,7 +93,7 @@ class VrPagesController extends Controller {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /vrpages/{id}
+	 * DELETE /vrcategories/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -111,10 +106,10 @@ class VrPagesController extends Controller {
     private function listBladeData()
     {
         $config = [];
-        $config['show'] = 'app.pages.show';
-        $config['create'] = 'app.pages.create';
-        $config['delete'] = 'app.pages.destroy';
-        $config['edit'] = 'app.pages.edit';
+        $config['show'] = 'app.categories.show';
+        $config['create'] = 'app.categories.create';
+        $config['delete'] = 'app.categories.destroy';
+        $config['edit'] = 'app.categories.edit';
         return $config;
     }
 }

@@ -14,12 +14,12 @@ class VrPagesSeeder extends Seeder
     public function run()
     {
           $pages = [
-            ["id" => "the_lab", "category_id" => "about", 'slug'=>'lab'],
-            ["id" => "samsung_irklavimas", "category_id" => "virtual-rooms", 'slug'=>'irklavimas'],
-            ["id" => "ktu_parasparnis", "category_id" => "virtual-rooms", 'slug'=>'parasparnis'],
-            ["id" => "hurl", "category_id" => "virtual-rooms", 'slug'=>'hurl'],
-            ["id" => "tilt_brush", "category_id" => "virtual-rooms", 'slug'=>'brush'],
-            ["id" => "fruit_ninja", "category_id" => "virtual-rooms", 'slug'=>'ninja'],
+            ["id" => "the_lab", "category_id" => "about"],
+            ["id" => "samsung_irklavimas", "category_id" => "virtual-rooms"],
+            ["id" => "ktu_parasparnis", "category_id" => "virtual-rooms"],
+            ["id" => "hurl", "category_id" => "virtual-rooms"],
+            ["id" => "tilt_brush", "category_id" => "virtual-rooms"],
+            ["id" => "fruit_ninja", "category_id" => "virtual-rooms"],
         ];
 
         DB::beginTransaction();

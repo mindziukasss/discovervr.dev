@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VrLanguageCodes extends Model
 {
     use UuidTrait;
-
+    public $incrementing = false;
     public $updated_at = false;
     /**
      * Database table name
