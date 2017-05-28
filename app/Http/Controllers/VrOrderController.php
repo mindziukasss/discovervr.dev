@@ -36,7 +36,7 @@ class VrOrderController extends Controller {
 	{
 
 		$config = [];
-		$config['rooms'] = VrPages::where('category_id', '=', 'virtual-rooms')->pluck('slug', 'id');
+		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
 		return view ('frontEnd.createOrder', $config);
 	}
 

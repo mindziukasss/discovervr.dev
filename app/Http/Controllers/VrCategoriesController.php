@@ -63,7 +63,7 @@ class VrCategoriesController extends Controller {
 	public function show($id)
 	{
         $config = [];
-        $config['item'] = VrCategories::with(['categoryTranslation'])->find($id)->toArray();
+        $config['item'] = VrCategories::with(['translation'])->find($id)->toArray();
         return view('admin.categoriesSingle', $config);
 	}
 
