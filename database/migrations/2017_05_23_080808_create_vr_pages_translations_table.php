@@ -23,6 +23,7 @@ class CreateVrPagesTranslationsTable extends Migration {
 			$table->string('title');
 			$table->text('description_short', 65535);
 			$table->text('description_long', 65535);
+			$table->string('slug');
 		});
 	}
 

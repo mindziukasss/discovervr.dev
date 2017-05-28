@@ -18,4 +18,10 @@ class VrCategories extends CoreModel
      * @var array
      */
     protected $fillable = ['id', 'comment'];
+
+    public function translation()
+     {
+         return $this->belongsToMany(VrLanguageCodes::class, 'vr_categories_translations', 'category_id', 'language_code' )->withPivot('name');
+     }
+
 }

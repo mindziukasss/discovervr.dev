@@ -15,7 +15,15 @@ class VrOrderController extends Controller {
 	 */
 	public function index()
 	{
-		return VrOrder::with(['experiences'])->get()->toArray();
+
+        $dataFromModel = new VrOrder;
+        $config = $this->listBladeData();
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = $dataFromModel->get()->toArray();
+
+		$config['orders'] = VrOrder::with(['experiences'])->get()->toArray();
+
+		return view('admin.orderList', $config);
 	}
 
 	/**
@@ -28,7 +36,7 @@ class VrOrderController extends Controller {
 	{
 
 		$config = [];
-		$config['rooms'] = VrPages::where('category_id', '=', 'virtual-rooms')->pluck('slug', 'id');
+		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
 		return view ('frontEnd.createOrder', $config);
 	}
 
@@ -109,4 +117,13 @@ class VrOrderController extends Controller {
 		//
 	}
 
+    private function listBladeData()
+    {
+        $config = [];
+        $config['show'] = 'app.orders.show';
+        $config['create'] = 'app.orders.create';
+        $config['delete'] = 'app.orders.destroy';
+        $config['edit'] = 'app.orders.edit';
+        return $config;
+    }
 }

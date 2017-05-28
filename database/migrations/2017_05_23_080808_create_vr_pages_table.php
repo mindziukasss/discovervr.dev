@@ -19,7 +19,6 @@ class CreateVrPagesTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->string('category_id', 36)->index('fk_vr_pages_vr_category1_idx');
-			$table->string('slug');
 			$table->string('cover_id', 36)->nullable()->index('fk_vr_pages_vr_resources1_idx');
 		});
 	}
