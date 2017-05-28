@@ -1,23 +1,21 @@
 
     <div class="container">
         <table class="table table-bordered">
-            <thead>
-            <tr>
-                @foreach($list[0] as $key => $value)
-                    <th>{{$key}}</th>
-                @endforeach
-                <th>edit</th>
-                <th>show</th>
-                <th>delete</th>
-
-            </tr>
-            </thead>
-            <tbody>
             @foreach($list as $key => $record)
                 <tr id="{{$record['id']}}">
                     @foreach($record as $key => $value)
                         <td>
-                            {{$value}}
+                            @if(!is_array($value))
+                                {{$value}}
+                            @else
+                                <ul>
+                                    @foreach ($value as $translation)
+                                        <li>
+                                            {{$translation['pivot']['name']}}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
                         </td>
                     @endforeach
                     <td><a href="{{ route($edit,$record['id']) }}">

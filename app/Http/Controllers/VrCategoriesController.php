@@ -14,15 +14,13 @@ class VrCategoriesController extends Controller {
 	 */
 	public function index()
 	{
-	    return VrCategories::with(['categoryTranslation'])->get()->toArray();
-//        $dataFromModel = new VrCategories;
-//        $config = $this->listBladeData();
-//        $config['tableName'] = $dataFromModel->getTableName();
-//        $config['list'] = $dataFromModel->get()->toArray();
-//
-//        $config['categories'] = VrCategories::get()->toArray();
-//
-//        return view('admin.categoriesList', $config);
+
+        $dataFromModel = new VrCategories;
+        $config = $this->listBladeData();
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = VrCategories::with(['translation'])->get()->toArray();
+
+        return view('admin.categoriesList', $config);
 	}
 
 	/**
@@ -64,7 +62,9 @@ class VrCategoriesController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+        $config = [];
+        $config['item'] = VrCategories::with(['categoryTranslation'])->find($id)->toArray();
+        return view('admin.categoriesSingle', $config);
 	}
 
 	/**
@@ -76,7 +76,11 @@ class VrCategoriesController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $config = [];
+        $config['route'] = 'app.categories.edit';
+        $config['id'] = $id;
+        $config['item'] = VrCategories::with(['translation'])->find($id)->toArray();
+        return view('admin.categoriesEdit', $config);
 	}
 
 	/**
@@ -88,7 +92,13 @@ class VrCategoriesController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+        $data = request()->all();
+        $record = VrCategories::find($id);
+        $record->update([]);
+        $translations = new VrCategoriesTranslationsController();
+        $translations->updateFromVrCategoriesController($data, $record);
+
+        return redirect()->route('app.categories.index');
 	}
 
 	/**
@@ -100,7 +110,9 @@ class VrCategoriesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        if (VrCategories::destroy($id)){
+            return ["success" => true, "id" => $id];
+        }
 	}
 
     private function listBladeData()

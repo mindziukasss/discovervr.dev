@@ -100,6 +100,23 @@ class VrCategoriesTranslationsController extends Controller {
 		//
 	}
 
+    public function updateFromVrCategoriesController($data, $record)
+    {
+        if(isset($data['name_lt'])) {
+            VrCategoriesTranslations::where('category_id', '=', $record->id)
+                ->where('language_code', '=', 'lt')->update([
+                'name' => $data['name_lt']
+            ]);
+        }
+
+        if(isset($data['name_en'])) {
+            VrCategoriesTranslations::where('category_id', '=', $record->id)
+                ->where('language_code', '=', 'en')->update([
+                'name' => $data['name_en']
+            ]);
+        }
+    }
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /vrcategoriestranslations/{id}
