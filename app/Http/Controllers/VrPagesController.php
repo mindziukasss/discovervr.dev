@@ -21,6 +21,7 @@ class VrPagesController extends Controller {
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = $dataFromModel->with(['translation', 'category', 'resource'])->get()->toArray();
+        $config['ignore'] = ['id', 'page_id'];
 
         return view('admin.listView', $config);
 	}
