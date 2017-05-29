@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VrPagesTranslations;
 use Illuminate\Routing\Controller;
 
 class VrPagesTranslationsController extends Controller {
@@ -36,6 +37,32 @@ class VrPagesTranslationsController extends Controller {
 	{
 		//
 	}
+
+    public function storeFromVrPagesController($data, $article)
+    {
+        if (isset($data['title_en']) && isset($data['slug_en']) && isset($data['description_short_en']) && isset($data['description_long_en'])) {
+
+            VrPagesTranslations::create([
+                'page_id' => $article->id,
+                'title' => $data['title_en'],
+                'language_code' => 'en',
+                'slug' => $data['slug_en'],
+                'description_short' => $data['description_short_en'],
+                'description_long' => $data['description_long_en']
+            ]);
+        }
+
+        if (isset($data['title_lt']) && isset($data['slug_lt']) && isset($data['description_short_lt']) && isset($data['description_long_lt'])) {
+            VrPagesTranslations::create([
+                'page_id' => $article->id,
+                'title' => $data['title_lt'],
+                'language_code' => 'lt',
+                'slug' => $data['slug_lt'],
+                'description_short' => $data['description_short_lt'],
+                'description_long' => $data['description_long_lt']
+            ]);
+        }
+     }
 
 	/**
 	 * Display the specified resource.

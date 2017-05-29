@@ -1,5 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VrCategories;
+use App\Models\VrCategoriesTranslations;
+use App\Models\VrPages;
+use App\Models\VrPagesTranslations;
+use App\Models\VrResources;
 use Illuminate\Routing\Controller;
 
 class VrPagesController extends Controller {
@@ -12,8 +17,24 @@ class VrPagesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        $config = $this->listBladeData();
+        $config['list'] = VrPages::with(['translation', 'category', 'resource'])->get()->toArray();
+
+        return view('admin.pageList', $config);
 	}
+
+	public function indexFrontEnd($slug)
+    {
+        $config = [];
+        return view ('frontEnd.pagesSingle', $config);
+    }
+
+    public function indexFrontEndEn($slug)
+    {
+        $config['item'] = VrPagesTranslations::where('slug', '=', $slug)->get()->toArray();
+        dd($config);
+        return view ('frontEnd.pagesSingle', $config);
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -23,7 +44,9 @@ class VrPagesController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$config['categories'] = VrCategoriesTranslations::where('language_code', '=', 'en')->pluck('name', 'category_id');
+
+		return view ('admin.pageCreate', $config);
 	}
 
 	/**
@@ -34,8 +57,18 @@ class VrPagesController extends Controller {
 	 */
 	public function store()
 	{
-		//
-	}
+        $resource = request()->file('image');
+        $uploadController = new VrResourcesController();
+        $data = request()->all();
+        $article = VrPages::create([
+            'category_id' => $data['categories'],
+            'cover_id' => $uploadController->upload($resource)
+        ]);
+        $record = new VrPagesTranslationsController();
+        $record->storeFromVrPagesController($data, $article);
+
+        return redirect()->route('app.pages.index');
+    }
 
 	/**
 	 * Display the specified resource.
@@ -46,7 +79,9 @@ class VrPagesController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+        $config['item'] = VrPages::with(['translation', 'category', 'resource'])->find($id)->toArray();
+
+        return view('admin.pageSingle', $config);
 	}
 
 	/**
@@ -85,4 +120,13 @@ class VrPagesController extends Controller {
 		//
 	}
 
+    private function listBladeData()
+    {
+        $config = [];
+        $config['show'] = 'app.pages.show';
+        $config['create'] = 'app.pages.create';
+        $config['delete'] = 'app.pages.destroy';
+        $config['edit'] = 'app.pages.edit';
+        return $config;
+    }
 }
