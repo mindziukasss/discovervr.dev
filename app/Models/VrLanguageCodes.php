@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VrLanguageCodes extends Model
 {
     use UuidTrait;
-
+    public $incrementing = false;
     public $updated_at = false;
     /**
      * Database table name
@@ -20,5 +20,5 @@ class VrLanguageCodes extends Model
      * Fillable column names
      * @var array
      */
-    protected $fillable = ['id', 'page_id', 'language_code'];
+    protected $fillable = ['id', 'language_code'];
 }

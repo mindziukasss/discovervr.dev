@@ -2,6 +2,7 @@
 namespace App\Models;  
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Ramsey\Uuid\Uuid;
 
 class CoreModel extends Model
 {
@@ -30,5 +31,10 @@ class CoreModel extends Model
                 $model->{$model->getKeyName()} = $model->attributes['id'];
             }
         });
+    }
+    public function getTableName()
+    {
+        $tableName = substr($this->table,3, -1);
+        return $tableName;
     }
 }
