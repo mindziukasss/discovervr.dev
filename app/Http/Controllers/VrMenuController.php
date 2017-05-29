@@ -22,8 +22,8 @@ class VrMenuController extends Controller
         $dataFromModel = new VrMenu;
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
-		$config['list'] = VrMenu::orderBy('sequence', 'asc')->get()->toArray();
-		return view('admin.listView', $config);
+        $config['list'] = VrMenu::orderBy('sequence', 'asc')->with(['translation'])->get()->toArray();
+        return view('admin.listView', $config);
     }
 
     /**
@@ -36,8 +36,10 @@ class VrMenuController extends Controller
     {
         $config['menu'] = VrMenu::get()->toArray();
         $config['route'] = 'app.menu.create';
-        $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name','id')->toArray();
-    dd($config);
+        $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name', 'id')->toArray();
+
+
+
         return view('admin.menu.create', $config);
     }
 
@@ -51,26 +53,29 @@ class VrMenuController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255|unique:vr_menu',
-            'url' => 'required|string|max:255|unique:vr_menu',
-            'sequence' => 'required|digits:1',
-        ]);
+//        $this->validate($request, [
+//            'name' => 'required|string|max:255|unique:vr_menu',
+//            'url' => 'required|string|max:255|unique:vr_menu',
+//            'sequence' => 'required|digits:1',
+//        ]);
 
         $config['menu'] = VrMenu::all();
         $data = request()->all();
 
-        VrMenu::create(array(
-            'name' => $data['name'],
+        $record = VrMenu::create(array(
+            'name' => $data['name_lt'],
             'url' => $data['url'],
             'sequence' => $data['sequence'],
             'vr_parent_id' => $data['listParent']
 
         ));
 
+        $translations = new VrMenuTranslationsController();
+        $translations->storeFromVrMenuController($data, $record);
+
         Session::flash('success', 'Was successfully save!');
 
-        return redirect()->route('app.menu.index', $config);
+        return redirect()->route('app.menu.index');
 
     }
 
@@ -83,7 +88,7 @@ class VrMenuController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('app.menu.show');
     }
 
     /**
@@ -96,8 +101,8 @@ class VrMenuController extends Controller
     public function edit($id)
     {
         $config['route'] = route('app.menu.edit', $id);
-        $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name','id')->toArray();
-        $config['menu'] = VrMenu::find($id)->toArray();
+        $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name', 'id')->toArray();
+        $config['menu'] = VrMenu::with(['translation'])->find($id)->toArray();
 
         return view('admin.menu.edit', $config);
     }
@@ -113,11 +118,11 @@ class VrMenuController extends Controller
     {
         $config = VrMenu::find($id);
 
-        $this->validate($request, [
-            'name' => 'required|string|max:255|unique:vr_menu',
-            'url' => 'required|string|max:255|unique:vr_menu',
-            'sequence' => 'required|digits:1|unique:vr_menu',
-        ]);
+//        $this->validate($request, [
+//            'name' => 'required|string|max:255|unique:vr_menu',
+//            'url' => 'required|string|max:255|unique:vr_menu',
+//            'sequence' => 'required|digits:1|unique:vr_menu',
+//        ]);
 
         $data = request()->all();
 
@@ -151,10 +156,10 @@ class VrMenuController extends Controller
     private function listBladeData()
     {
         $config = [];
-        $config['show'] = 'app.orders.show';
-        $config['create'] = 'app.orders.create';
-        $config['delete'] = 'app.orders.destroy';
-        $config['edit'] = 'app.orders.edit';
+        $config['show'] = 'app.menu.show';
+        $config['create'] = 'app.menu.create';
+        $config['delete'] = 'app.menu.destroy';
+        $config['edit'] = 'app.menu.edit';
         return $config;
     }
 }
