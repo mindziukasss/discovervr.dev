@@ -4,10 +4,16 @@
             <th>Key</th>
             <th>Value</th>
         </tr>
+        {!! Form::open(
+            array(
+                'route' => ['app.pages.edit', $id],
+                'class' => 'form',
+                'novalidate' => 'novalidate',
+                'files' => true)) !!}
+        {!! Form::file('image') !!}
         {!! Form::open(['url'=>route('app.pages.edit', $id)])!!}
         @foreach($item as $key => $value)
-            @if($key != 'count' && $key != 'id' && $key != 'translation' && $key != 'category' && $key != 'resource'
-            && $key != 'created_at' && $key != 'updated_at' && $key != 'deleted_at' && $key != 'category_id')
+            @if(!in_array($key, $ignore))
                 <tr>
                     <td>{{$key}}</td>
                     <td>
@@ -17,7 +23,7 @@
             @elseif ($key == 'translation')
                 @foreach ($value as $key => $translation)
                     @foreach ($translation['pivot'] as $key => $lang)
-                        @if($key != 'page_id' && $key != 'language_code')
+                        @if(!in_array($key, $ignore))
                             <tr>
                                 <td>
                                     {{$key . ' ' . $translation['pivot']['language_code']}}
@@ -32,7 +38,7 @@
             @elseif ($key == 'category')
                 @foreach ($value['translation'] as $key => $translation)
                     @foreach ($translation['pivot'] as $key => $lang)
-                        @if($key != 'category_id' && $key != 'language_code')
+                        @if(!in_array($key, $ignore))
                             <tr>
                                 <td>
                                     {{'Category ' . $key . ' ' . $translation['pivot']['language_code']}}
@@ -49,5 +55,8 @@
             @endif
 
         @endforeach
+        {{Form::submit('Submit')}}
+
+        {!! Form::close() !!}
     </table>
 </div>

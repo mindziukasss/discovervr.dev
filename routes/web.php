@@ -74,9 +74,9 @@ Route::group(['prefix' => 'admin'], function () {
             });
         });
 
-        Route::group(['prefix' => 'en'], function () {
-            Route::get('/{slug}', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@indexFrontEndEn']);
-        });
+//        Route::group(['prefix' => 'en'], function () {
+//            Route::get('/{slug}', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@indexFrontEndEn']);
+//        });
 
 
 
