@@ -3,6 +3,8 @@
 use App\Models\VrCategories;
 use App\Models\VrCategoriesTranslations;
 use App\Models\VrPages;
+use App\Models\VrPagesTranslations;
+use App\Models\VrResources;
 use Illuminate\Routing\Controller;
 
 class VrPagesController extends Controller {
@@ -29,7 +31,8 @@ class VrPagesController extends Controller {
 
     public function indexFrontEndEn($slug)
     {
-        $config = [];
+        $config['item'] = VrPagesTranslations::where('slug', '=', $slug)->get()->toArray();
+        dd($config);
         return view ('frontEnd.pagesSingle', $config);
     }
 
