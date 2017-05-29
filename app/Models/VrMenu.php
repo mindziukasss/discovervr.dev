@@ -6,7 +6,6 @@ namespace App\Models;
 
 class VrMenu extends CoreModel
 {
-    use UuidTrait;
 
     /**
      * Database table name
@@ -18,4 +17,11 @@ class VrMenu extends CoreModel
      * @var array
      */
     protected $fillable = ['id', 'url', 'new_window', 'name', 'sequence', 'vr_parent_id'];
+
+
+
+    public function  subCategory()
+    {
+        return $this->hasMany(VrMenu::class, 'vr_parent_id');
+    }
 }
