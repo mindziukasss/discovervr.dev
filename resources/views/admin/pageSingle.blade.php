@@ -1,3 +1,7 @@
+
+@extends('base')
+@section('content')
+
 <div class="container">
     <table class="table table-bordered">
         <tr>
@@ -50,3 +54,4 @@
         @endforeach
     </table>
 </div>
+    @endsection

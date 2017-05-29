@@ -7,7 +7,7 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}"/>
 
 </head>
-<body>
+<body style ="background-color:#ffeecc;">
 	@include('admin.messages')
 	@include('menu_admin')
 	@yield('content')
