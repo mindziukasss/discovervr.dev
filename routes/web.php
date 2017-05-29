@@ -35,6 +35,9 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/edit', ['uses' => 'VrMenuController@update']);
             Route::delete('/delete', ['as' => 'app.menu.destroy', 'uses' => 'VrMenuController@destroy']);
         });
+
+    });
+
         Route::group(['prefix' => 'orders'], function () {
             Route::get('/', ['as' => 'app.orders.index', 'uses' => 'VrOrderController@index']);
             Route::get('/create', ['as' => 'app.orders.create', 'uses' => 'VrOrderController@create']);
@@ -75,6 +78,6 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/{slug}', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@indexFrontEndEn']);
         });
 
-    });
+
 
 });
