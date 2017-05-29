@@ -4,6 +4,7 @@
             @foreach($list as $key => $record)
                 <tr id="{{$record['id']}}">
                     @foreach($record as $key => $value)
+
                         <td>
                             @if(!is_array($value))
                                 {{$value}}

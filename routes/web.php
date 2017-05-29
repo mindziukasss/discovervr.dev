@@ -70,3 +70,7 @@ Route::group(['prefix' => 'categories'], function () {
         Route::delete('/delete', ['as' => 'app.categories.destroy', 'uses' => 'VrCategoriesController@destroy']);
     });
 });
+
+Route::group(['prefix' => 'en'], function () {
+    Route::get('/{slug}', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@indexFrontEndEn']);
+});
