@@ -18,16 +18,16 @@ class VrPagesController extends Controller {
         $config = $this->listBladeData();
         $config['list'] = VrPages::with(['translation', 'category', 'resource'])->get()->toArray();
 
-        return view('admin.pagesList', $config);
+        return view('admin.pageList', $config);
 	}
 
-	public function frontEndIndex($slug)
+	public function indexFrontEnd($slug)
     {
         $config = [];
         return view ('frontEnd.pagesSingle', $config);
     }
 
-    public function frontEndIndexEn($slug)
+    public function indexFrontEndEn($slug)
     {
         $config = [];
         return view ('frontEnd.pagesSingle', $config);
@@ -76,7 +76,9 @@ class VrPagesController extends Controller {
 	 */
 	public function show($id)
 	{
-        return VrPages::with(['translation', 'category', 'resource'])->find($id)->toArray();
+        $config['item'] = VrPages::with(['translation', 'category', 'resource'])->find($id)->toArray();
+
+        return view('admin.pageSingle', $config);
 	}
 
 	/**
