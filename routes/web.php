@@ -30,7 +30,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::group(['prefix' => '{id}'], function () {
 
-            Route::get('/', ['uses' => 'VrMenuController@show']);
+            Route::get('/', ['as' => 'app.menu.show', 'uses' => 'VrMenuController@show']);
             Route::get('/edit', ['as' => 'app.menu.edit', 'uses' => 'VrMenuController@edit']);
             Route::post('/edit', ['uses' => 'VrMenuController@update']);
             Route::delete('/delete', ['as' => 'app.menu.destroy', 'uses' => 'VrMenuController@destroy']);
