@@ -83,17 +83,18 @@ class VrMenuTranslationsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function updateFromVrMenuController($data, $record)
+	public function updateFromVrMenuController($data, $id)
 	{
+
         if(isset($data['name_lt'])) {
-            VrMenuTranslations::where('menu_id', '=', $record->id)
+            VrMenuTranslations::where('menu_id', '=', $id)
                 ->where('language_code', '=', 'lt')->update([
                     'name' => $data['name_lt']
                 ]);
         }
 
         if(isset($data['name_en'])) {
-            VrMenuTranslations::where('menu_id', '=', $record->id)
+            VrMenuTranslations::where('menu_id', '=', $id)
                 ->where('language_code', '=', 'en')->update([
                     'name' => $data['name_en']
                 ]);

@@ -88,7 +88,10 @@ class VrMenuController extends Controller
      */
     public function show($id)
     {
-        return view('app.menu.show');
+
+        $config = [];
+        $config['item'] = VrMenu::find($id)->toArray();
+        return view('admin.menu.show', $config);
     }
 
     /**
@@ -102,6 +105,7 @@ class VrMenuController extends Controller
     {
         $config['route'] = route('app.menu.edit', $id);
         $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name', 'id')->toArray();
+        $config['ignore'] = ['menu_id', 'language_code'];
         $config['menu'] = VrMenu::with(['translation'])->find($id)->toArray();
 
         return view('admin.menu.edit', $config);
@@ -116,7 +120,6 @@ class VrMenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $config = VrMenu::find($id);
 
 //        $this->validate($request, [
 //            'name' => 'required|string|max:255|unique:vr_menu',
@@ -125,17 +128,20 @@ class VrMenuController extends Controller
 //        ]);
 
         $data = request()->all();
-
-        $config->update(array(
-            'name' => $data['name'],
+        $record = VrMenu::find($id);
+        $record->update(array(
+            'name' => $data['name_lt'],
             'url' => $data['url'],
             'sequence' => $data['sequence'],
             'vr_parent_id' => $data['listParent']
         ));
 
+        $translations = new VrMenuTranslationsController();
+        $translations->updateFromVrMenuController($data, $id);
+
         Session::flash('success', 'Was successfully save!');
 
-        return redirect()->route('app.menu.index', $config);
+        return redirect()->route('app.menu.index', $record);
     }
 
     /**
@@ -149,7 +155,7 @@ class VrMenuController extends Controller
     {
 
         if (VrMenu::destroy($id)) {
-            return ["success" => true, "id" => $id];
+            return json_encode(["success" => true, "id" => $id]);
         }
     }
 
