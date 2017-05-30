@@ -27,13 +27,13 @@
                             @elseif ($key == 'translation')
                                 @foreach($value as $key => $translation)
                                     @if(app()->getLocale() == $translation['language_code'])
-                                        <ul>
+
                                             @foreach($translation['pivot'] as $key => $text)
                                                 @if(!in_array($key, $ignore) )
                                                     <li>{{$text}}</li>
                                                 @endif
                                             @endforeach
-                                        </ul>
+
                                     @endif
                                 @endforeach
                             @endif
