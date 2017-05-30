@@ -1,7 +1,7 @@
 <div class="container">
     <h2>{{ucfirst($tableName)}}s table</h2>
     <a href="{{ route($create) }}">Create new {{$tableName}}</a>
-    <table class="table table-bordered">
+    <table class="table table-bordered col-md-8">
         <thead>
         <tr>
             @foreach($list as $key => $value)

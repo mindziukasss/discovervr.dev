@@ -37,6 +37,7 @@ class VrOrderController extends Controller {
         dd($dates);
 	}
 
+
 	/**
 	 * Show the form for creating a new resource.
 	 * GET /vrorder/create
@@ -65,6 +66,7 @@ class VrOrderController extends Controller {
         $config['time'] = $time;
 		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
 		return view ('frontEnd.createOrder', $config);
+
 	}
 
 	/**

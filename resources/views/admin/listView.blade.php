@@ -28,7 +28,7 @@
                                         <ul>
                                             @foreach($translation['pivot'] as $key => $text)
                                                 @if(!in_array($key, $ignore) )
-                                                <li>{{$text}}</li>
+                                                    <li>{{$text}}</li>
                                                 @endif
                                             @endforeach
                                         </ul>

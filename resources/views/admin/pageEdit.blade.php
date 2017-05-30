@@ -1,3 +1,7 @@
+
+
+@extends('base')
+@section('content')
 <div class="container">
     <table class="table table-bordered">
         <tr>
@@ -59,4 +63,6 @@
 
         {!! Form::close() !!}
     </table>
+    {{Form::submit('Edit')}}
 </div>
+    @endsection
