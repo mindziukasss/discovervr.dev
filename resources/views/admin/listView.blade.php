@@ -1,6 +1,8 @@
 @extends('base')
 @section('content')
     <div class="container">
+
+
         <h2>{{ucfirst($tableName)}}s table</h2>
         <a href="{{ route($create) }}">Create new {{$tableName}}</a>
         <table class="table table-bordered">

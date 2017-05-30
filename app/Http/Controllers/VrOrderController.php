@@ -20,8 +20,11 @@ class VrOrderController extends Controller {
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = $dataFromModel->with(['experiences'])->get()->toArray();
-
-		return view('admin.listView', $config);
+        if($config['list'] == null )
+        {
+            return redirect()->route('app.orders.create', $config);
+        }
+        return view('admin.listView', $config);
 	}
 
 	/**
