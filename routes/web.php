@@ -78,16 +78,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
         Route::group(['prefix' => 'en'], function () {
             Route::get('/{slug}', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@indexFrontEndEn']);
         });
-});
 
-Route::group(['prefix' => 'carbon'], function () {
-    Route::get('/', ['as' => 'app.orders.index', 'uses' => 'VrOrderController@index']);
-    Route::get('/create', ['as' => 'app.orders.create', 'uses' => 'VrOrderController@create']);
-    Route::post('/create', ['uses' => 'VrOrderController@store']);
-    Route::group(['prefix' => '{id}'], function () {
-        Route::get('/', ['as' => 'app.orders.show', 'uses' => 'VrOrderController@show']);
-        Route::get('/edit', ['as' => 'app.orders.edit', 'uses' => 'VrOrderController@edit']);
-        Route::post('/edit', ['uses' => 'VrOrderController@update']);
-        Route::delete('/delete', ['as' => 'app.orders.destroy', 'uses' => 'VrOrderController@destroy']);
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', ['as' => 'app.users.index', 'uses' => 'VrUsersController@index']);
+        Route::get('/create', ['as' => 'app.users.create', 'uses' => 'VrUsersController@create']);
+        Route::post('/create', ['uses' => 'VrUsersController@store']);
+        Route::group(['prefix' => '{id}'], function () {
+            Route::get('/', ['as' => 'app.users.show', 'uses' => 'VrUsersController@show']);
+            Route::get('/edit', ['as' => 'app.users.edit', 'uses' => 'VrUsersController@edit']);
+            Route::post('/edit', ['uses' => 'VrUsersController@update']);
+            Route::delete('/delete', ['as' => 'app.users.destroy', 'uses' => 'VrUsersController@destroy']);
+        });
     });
 });
+
