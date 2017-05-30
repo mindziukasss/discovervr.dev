@@ -48,7 +48,7 @@
 
 
 
-                {{Form::submit('Submit')}}
+                {{Form::submit('Create')}}
 
                 {!! Form::close() !!}
 
