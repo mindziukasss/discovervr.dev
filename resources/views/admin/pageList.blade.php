@@ -58,3 +58,5 @@
         });
     }
 </script>
+
+<aside class="col-md-02"></aside>

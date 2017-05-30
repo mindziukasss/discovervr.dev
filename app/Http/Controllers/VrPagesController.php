@@ -21,6 +21,7 @@ class VrPagesController extends Controller {
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = $dataFromModel->with(['translation', 'category', 'resource'])->get()->toArray();
+        $config['ignore'] = ['id', 'page_id'];
 
         return view('admin.listView', $config);
 	}
@@ -95,7 +96,11 @@ class VrPagesController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $config['id'] = $id;
+        $config['categories'] = VrCategoriesTranslations::where('language_code', '=', 'en')->pluck('name', 'category_id');
+        $config['item'] = VrPages::with(['translation', 'category', 'resource'])->find($id)->toArray();
+
+        return view ('admin.pageEdit', $config);
 	}
 
 	/**
