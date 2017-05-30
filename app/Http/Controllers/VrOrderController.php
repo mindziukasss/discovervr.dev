@@ -6,6 +6,7 @@ use App\Models\VrReservations;
 use Carbon\Carbon;
 use DateTimeZone;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Input;
 
 class VrOrderController extends Controller {
 
@@ -49,20 +50,32 @@ class VrOrderController extends Controller {
 
 		$config = [];
 
-//        $dates = [];
-//        for($date = Carbon::now('Europe/Vilnius')->addHours(2)->minute(10)->second(0); $date->lte(Carbon::createFromDate(22, 00, 00, 'Europe/Vilnius')); $date->addMinutes(10)) {
-//            $time[] = $date->format('Y/m/d');
-//        }
-//        $config['time'] = $dates;
-
-        $array = VrReservations::select('time', 'experience_id')->get()->toArray();
         $time = [];
-        for($date = Carbon::now('Europe/Vilnius')->addHours(2)->minute(10)->second(0);
-            $date->lte(Carbon::createFromTime(22, 00, 00, 'Europe/Vilnius'));
-            $date->addMinutes(10)) {
-                $time[] = $date->format('Y/m/d H:i:s');
-            }
+        for($hours = Carbon::createFromTime(11, 00, 00, 'Europe/Vilnius')->addHours(0)->minute(10)->second(0);
+            $hours->lte(Carbon::createFromTime(12, 00, 00, 'Europe/Vilnius'));
+            $hours->addMinutes(10)) {
+                $time[] = $hours->format('H:i');
+        }
 
+        $date = [];
+        for($days = Carbon::createFromDate();
+            $days->lte(Carbon::createFromDate()->addDays(14));
+            $days->addDay()) {
+                $date[] = $days->format('Y-m-d');
+        }
+
+        // may not be useful, returns array of dates as keys and hours arrays as values assoc with keys
+        $dateTimeArray = [];
+        foreach ($date as $key => $day) {
+            $key = [];
+            foreach($time as $hour) {
+                array_push($key, $hour);
+            }
+            $dateTimeArray[$day] = $key;
+        }
+
+        $config['dateTimeArray'] = $dateTimeArray;
+        $config['date'] = array_combine($date, $date);
         $config['time'] = $time;
 		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
 		return view ('frontEnd.createOrder', $config);
@@ -77,15 +90,14 @@ class VrOrderController extends Controller {
 	 */
 	public function store()
 	{
-		$data = request()->all();
-
-		$experience = [];
-		foreach($data['room'] as $key => $room){
-		    $key = [];
-		    foreach($data[$room.'time'] as $time) {
-		        array_push($key, $time);
+        $data = request()->all();
+        $experience = [];
+        foreach($data['room'] as $key => $room){
+            $key = [];
+            foreach($data[$room.'time'] as $time) {
+                array_push($key, $data['date'] . ' ' . $time);
             }
-		    $experience[$room] = $key;
+            $experience[$room] = $key;
         }
 
         if(sizeOf($experience) > 0) {
