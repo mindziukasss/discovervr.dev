@@ -102,6 +102,7 @@ class VrPagesTranslationsController extends Controller {
 
 	public function updateFromVrPagesController($data, $id)
     {
+
         if (isset($data['title_en']) && isset($data['slug_en']) && isset($data['description_short_en']) && isset($data['description_long_en'])) {
 
             VrPagesTranslations::where('page_id', '=', $id)->where('language_code', '=', 'en')->update([

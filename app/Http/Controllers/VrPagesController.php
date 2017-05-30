@@ -15,6 +15,7 @@ class VrPagesController extends Controller {
 	 *
 	 * @return Response
 	 */
+
 	public function index()
 	{
         $dataFromModel = new VrPages;
@@ -61,12 +62,21 @@ class VrPagesController extends Controller {
 	public function store()
 	{
         $resource = request()->file('image');
+        dd($resource);
         $uploadController = new VrResourcesController();
         $data = request()->all();
-        $article = VrPages::create([
-            'category_id' => $data['categories'],
-            'cover_id' => $uploadController->upload($resource)
-        ]);
+
+        if($resource != null) {
+            $article = VrPages::create([
+                'category_id' => $data['categories'],
+                'cover_id' => $uploadController->upload($resource)
+            ]);
+        } else {
+            $article = VrPages::create([
+                'category_id' => $data['categories'],
+            ]);
+        }
+
         $record = new VrPagesTranslationsController();
         $record->storeFromVrPagesController($data, $article);
 
@@ -130,11 +140,15 @@ class VrPagesController extends Controller {
         $resource = request()->file('image');
         $uploadController = new VrResourcesController();
         $data = request()->all();
-        $article = VrPages::where('id', '=', $id)->update([
-            'cover_id' => $uploadController->upload($resource)
-        ]);
+
+        if($resource != null) {
+            VrPages::where('id', '=', $id)->update([
+                'cover_id' => $uploadController->upload($resource)
+            ]);
+        }
+
         $record = new VrPagesTranslationsController();
-        $record->updateFromVrPagesController($data, $article, $id);
+        $record->updateFromVrPagesController($data, $id);
 
         return redirect()->route('app.pages.index');
 	}
@@ -148,7 +162,9 @@ class VrPagesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        if (VrPages::destroy($id)){
+            return ["success" => true, "id" => $id];
+        }
 	}
 
     private function listBladeData()
