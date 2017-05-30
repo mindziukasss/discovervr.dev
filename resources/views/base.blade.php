@@ -9,6 +9,13 @@
 </head>
 <body>
 
+
+	@include('admin.messages')
+
+	@include('menu_admin')
+
+		@yield('content')
+
 @include('admin.messages')
 <div class="menu.container-fluid">
     <div class="row">
