@@ -7,7 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
 </head>
+
 <body>
+
 
 @include('admin.messages')
 <div class="menu.container-fluid">

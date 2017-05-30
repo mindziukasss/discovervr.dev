@@ -11,14 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/admin', function () {
+    return view('base');
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']] , function () {
 
@@ -30,7 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
 
         Route::group(['prefix' => '{id}'], function () {
 
-            Route::get('/', ['uses' => 'VrMenuController@show']);
+            Route::get('/', ['as' => 'app.menu.show', 'uses' => 'VrMenuController@show']);
             Route::get('/edit', ['as' => 'app.menu.edit', 'uses' => 'VrMenuController@edit']);
             Route::post('/edit', ['uses' => 'VrMenuController@update']);
             Route::delete('/delete', ['as' => 'app.menu.destroy', 'uses' => 'VrMenuController@destroy']);

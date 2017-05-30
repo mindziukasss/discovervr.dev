@@ -24,4 +24,10 @@ class VrMenu extends CoreModel
     {
         return $this->hasMany(VrMenu::class, 'vr_parent_id');
     }
+
+
+    public function translation()
+    {
+        return $this->belongsToMany(VrLanguageCodes::class, 'vr_menu_translations', 'menu_id', 'language_code' )->withPivot('name');
+    }
 }

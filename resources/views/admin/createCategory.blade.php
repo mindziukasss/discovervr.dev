@@ -1,4 +1,12 @@
-@include('style')
+
+
+@extends('base')
+@section('content')
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+
 {!! Form::open(['url' => route('app.categories.create')]) !!}
 <div>
     <h2> Create new category </h2>
@@ -12,11 +20,13 @@
         </table>
 
 
-
-
-    {{ Form::submit('Click Me!') }}
-
-
-</div>
-
+{{ Form::submit('Create') }}
 {!! Form::close() !!}
+
+
+            </div>
+        </div>
+    </div>
+
+@endsection
+
