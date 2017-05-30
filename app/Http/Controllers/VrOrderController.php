@@ -25,12 +25,18 @@ class VrOrderController extends Controller {
 //
 //		return view('admin.listView', $config);
 
-        $carbon = new Carbon();
+        $carbonForm = Carbon::createFromDate(2000, 04, 11, 'Europe/Vilnius');
+        echo $carbonForm;
 
-       
-        echo Carbon::parse('first day of December 2008')->addWeeks(2);
+        $dates = [];
 
-    }
+        for($date = Carbon::now('Europe/Vilnius')->addHours(2)->minute(10)->second(0); $date->lte(Carbon::createFromTime(22, 00, 00, 'Europe/Vilnius')); $date->addMinutes(10)) {
+            $dates[] = $date->format('Y/m/d H:i:s');
+        }
+
+        dd($dates);
+	}
+
 
 	/**
 	 * Show the form for creating a new resource.
@@ -41,11 +47,26 @@ class VrOrderController extends Controller {
 	public function create()
 	{
 
-//		$config = [];
-//		//$config['trans']
-//		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
-//		return view ('frontEnd.createOrder', $config);
-        return view('admin.menu.carbon');
+		$config = [];
+
+//        $dates = [];
+//        for($date = Carbon::now('Europe/Vilnius')->addHours(2)->minute(10)->second(0); $date->lte(Carbon::createFromDate(22, 00, 00, 'Europe/Vilnius')); $date->addMinutes(10)) {
+//            $time[] = $date->format('Y/m/d');
+//        }
+//        $config['time'] = $dates;
+
+        $array = VrReservations::select('time', 'experience_id')->get()->toArray();
+        $time = [];
+        for($date = Carbon::now('Europe/Vilnius')->addHours(2)->minute(10)->second(0);
+            $date->lte(Carbon::createFromTime(22, 00, 00, 'Europe/Vilnius'));
+            $date->addMinutes(10)) {
+                $time[] = $date->format('Y/m/d H:i:s');
+            }
+
+        $config['time'] = $time;
+		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
+		return view ('frontEnd.createOrder', $config);
+
 	}
 
 	/**
@@ -56,25 +77,25 @@ class VrOrderController extends Controller {
 	 */
 	public function store()
 	{
-//		$data = request()->all();
-//		$experience = [];
-//		foreach($data['room'] as $key => $room){
-//		    $key = [];
-//		    foreach($data[$room.'time'] as $time) {
-//		        array_push($key, $data[$room.'date'] . ' ' . $time);
-//            }
-//		    $experience[$room] = $key;
-//        }
-//        dd($experience);
-//
-//        if(sizeOf($experience) > 0) {
-//            $record = VrOrder::create([
-//                'status' => 1,
-//            ]);
-//
-//            $reservationTable = new VrReservationsController();
-//            $reservationTable->storeFromOrder($experience, $record);
-//        }
+		$data = request()->all();
+
+		$experience = [];
+		foreach($data['room'] as $key => $room){
+		    $key = [];
+		    foreach($data[$room.'time'] as $time) {
+		        array_push($key, $time);
+            }
+		    $experience[$room] = $key;
+        }
+
+        if(sizeOf($experience) > 0) {
+            $record = VrOrder::create([
+                'status' => 1,
+            ]);
+
+            $reservationTable = new VrReservationsController();
+            $reservationTable->storeFromOrder($experience, $record);
+        }
 
     }
 

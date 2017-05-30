@@ -75,9 +75,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
             });
         });
 
-        Route::group(['prefix' => 'en'], function () {
-            Route::get('/{slug}', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@indexFrontEndEn']);
-        });
+//        Route::group(['prefix' => 'en'], function () {
+//            Route::get('/{slug}', ['as' => 'app.pages.index', 'uses' => 'VrPagesController@indexFrontEndEn']);
+//        });
 
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', ['as' => 'app.users.index', 'uses' => 'VrUsersController@index']);
