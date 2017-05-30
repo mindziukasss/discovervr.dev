@@ -3,6 +3,8 @@
 use App\Models\VrOrder;
 use App\Models\VrPages;
 use App\Models\VrReservations;
+use Carbon\Carbon;
+use DateTimeZone;
 use Illuminate\Routing\Controller;
 
 class VrOrderController extends Controller {
@@ -16,16 +18,20 @@ class VrOrderController extends Controller {
 	public function index()
 	{
 
-        $dataFromModel = new VrOrder;
-        $config = $this->listBladeData();
-        $config['tableName'] = $dataFromModel->getTableName();
-        $config['list'] = $dataFromModel->with(['experiences'])->get()->toArray();
-        if($config['list'] == null )
-        {
-            return redirect()->route('app.orders.create', $config);
-        }
-        return view('admin.listView', $config);
-	}
+
+
+//        $dataFromModel = new VrOrder;
+//        $config = $this->listBladeData();
+//        $config['tableName'] = $dataFromModel->getTableName();
+//        $config['list'] = $dataFromModel->with(['experiences'])->get()->toArray();
+//
+//		return view('admin.listView', $config);
+
+        $carbon = new Carbon();
+
+       
+        echo Carbon::parse('first day of December 2008')->addWeeks(2);
+
 
 	/**
 	 * Show the form for creating a new resource.
@@ -36,9 +42,11 @@ class VrOrderController extends Controller {
 	public function create()
 	{
 
-		$config = [];
-		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
-		return view ('frontEnd.createOrder', $config);
+//		$config = [];
+//		//$config['trans']
+//		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
+//		return view ('frontEnd.createOrder', $config);
+        return view('admin.menu.carbon');
 	}
 
 	/**
@@ -49,24 +57,25 @@ class VrOrderController extends Controller {
 	 */
 	public function store()
 	{
-		$data = request()->all();
-		$experience = [];
-		foreach($data['room'] as $key => $room){
-		    $key = [];
-		    foreach($data[$room.'time'] as $time) {
-		        array_push($key, $data[$room.'date'] . ' ' . $time);
-            }
-		    $experience[$room] = $key;
-        }
-
-        if(sizeOf($experience) > 0) {
-            $record = VrOrder::create([
-                'status' => 1,
-            ]);
-
-            $reservationTable = new VrReservationsController();
-            $reservationTable->storeFromOrder($experience, $record);
-        }
+//		$data = request()->all();
+//		$experience = [];
+//		foreach($data['room'] as $key => $room){
+//		    $key = [];
+//		    foreach($data[$room.'time'] as $time) {
+//		        array_push($key, $data[$room.'date'] . ' ' . $time);
+//            }
+//		    $experience[$room] = $key;
+//        }
+//        dd($experience);
+//
+//        if(sizeOf($experience) > 0) {
+//            $record = VrOrder::create([
+//                'status' => 1,
+//            ]);
+//
+//            $reservationTable = new VrReservationsController();
+//            $reservationTable->storeFromOrder($experience, $record);
+//        }
 
     }
 
