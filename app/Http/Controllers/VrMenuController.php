@@ -37,7 +37,7 @@ class VrMenuController extends Controller
         $config['menu'] = VrMenu::get()->toArray();
         $config['route'] = 'app.menu.create';
         $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name','id')->toArray();
-    dd($config);
+
         return view('admin.menu.create', $config);
     }
 
@@ -83,7 +83,7 @@ class VrMenuController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.menu.show');
     }
 
     /**
@@ -151,10 +151,10 @@ class VrMenuController extends Controller
     private function listBladeData()
     {
         $config = [];
-        $config['show'] = 'app.orders.show';
-        $config['create'] = 'app.orders.create';
-        $config['delete'] = 'app.orders.destroy';
-        $config['edit'] = 'app.orders.edit';
+        $config['show'] = 'app.menu.show';
+        $config['create'] = 'app.menu.create';
+        $config['delete'] = 'app.menu.destroy';
+        $config['edit'] = 'app.menu.edit';
         return $config;
     }
 }
