@@ -1,0 +1,35 @@
+
+
+ul {
+    list-style-type: none;
+    margin: 13px;
+    padding: 13px;
+    width: 180px;
+    background-color: #8890f1;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 13px;
+    text-decoration: none;
+    text-align: center;
+    height: 180px;
+}
+
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+aside {
+    position: relative;
+    width:170px;
+    top: 0px;
+    bottom: 0px;
+}
+

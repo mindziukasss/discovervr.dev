@@ -6,11 +6,15 @@ use Ramsey\Uuid\Uuid;
 
 class VrCategoriesController extends Controller {
 
+
+
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /vrcategories
 	 *
 	 * @return Response
+     *
 	 */
 	public function index()
 	{
@@ -19,7 +23,11 @@ class VrCategoriesController extends Controller {
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = VrCategories::with(['translation'])->get()->toArray();
-
+        if($config['list'] == null )
+        {
+            return redirect()->route('app.categories.create', $config);
+        }
+        $config['ignore'] = ['category_id', 'id'];
         return view('admin.listView', $config);
 	}
 
@@ -64,6 +72,7 @@ class VrCategoriesController extends Controller {
 	{
         $config = [];
         $config['item'] = VrCategories::with(['translation'])->find($id)->toArray();
+
         return view('admin.categoriesSingle', $config);
 	}
 

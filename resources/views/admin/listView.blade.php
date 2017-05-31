@@ -1,7 +1,8 @@
 @extends('base')
-
 @section('content')
     <div class="container">
+
+
         <h2>{{ucfirst($tableName)}}s table</h2>
         <a href="{{ route($create) }}">Create new {{$tableName}}</a>
         <table class="table table-bordered">
@@ -22,10 +23,23 @@
                     @foreach($record as $key => $value)
                         <td>
                             @if(!is_array($value))
-                            {{$value}}
+                                {{$value}}
+                            @elseif ($key == 'translation')
+                                @foreach($value as $key => $translation)
+                                    @if(app()->getLocale() == $translation['language_code'])
+
+                                            @foreach($translation['pivot'] as $key => $text)
+                                                @if(!in_array($key, $ignore) )
+                                                    <li>{{$text}}</li>
+                                                @endif
+                                            @endforeach
+
+                                    @endif
+                                @endforeach
                             @endif
                         </td>
                     @endforeach
+
                     <td><a href="{{ route($edit,$record['id']) }}">
                             <button type="button" class="btn btn-primary">Edit</button>
                         </a>

@@ -11,6 +11,19 @@ use Session;
 class VrMenuController extends Controller
 {
 
+    public function frontendIndex ()
+    {
+        $dataFromModel = new VrMenu;
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = $dataFromModel->where('vr_parent_id', '=', null)-> get()->toArray();
+        $config['listDropDown'] = $dataFromModel->where('vr_parent_id', '!=', null)-> get()->toArray();
+
+        //dd($config);
+
+        return view('frontend', $config);
+    }
+
+
     /**
      * Display a listing of the resource.
      * GET /vrmenu
@@ -22,8 +35,15 @@ class VrMenuController extends Controller
         $dataFromModel = new VrMenu;
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
-		$config['list'] = VrMenu::orderBy('sequence', 'asc')->get()->toArray();
-		return view('admin.listView', $config);
+        $config['list'] = VrMenu::orderBy('sequence', 'asc')->with(['translation'])->get()->toArray();
+        if($config['list'] == null )
+        {
+            return redirect()->route('app.menu.create', $config);
+        }
+
+        $config['ignore'] = ['id','menu_id'];
+
+        return view('admin.listView', $config);
     }
 
     /**
@@ -37,7 +57,7 @@ class VrMenuController extends Controller
         $config['menu'] = VrMenu::get()->toArray();
         $config['route'] = 'app.menu.create';
         $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name','id')->toArray();
-    dd($config);
+
         return view('admin.menu.create', $config);
     }
 
@@ -51,26 +71,29 @@ class VrMenuController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255|unique:vr_menu',
-            'url' => 'required|string|max:255|unique:vr_menu',
-            'sequence' => 'required|digits:1',
-        ]);
+//        $this->validate($request, [
+//            'name' => 'required|string|max:255|unique:vr_menu',
+//            'url' => 'required|string|max:255|unique:vr_menu',
+//            'sequence' => 'required|digits:1',
+//        ]);
 
         $config['menu'] = VrMenu::all();
         $data = request()->all();
 
-        VrMenu::create(array(
-            'name' => $data['name'],
+        $record = VrMenu::create(array(
+            'name' => $data['name_lt'],
             'url' => $data['url'],
             'sequence' => $data['sequence'],
             'vr_parent_id' => $data['listParent']
 
         ));
 
+        $translations = new VrMenuTranslationsController();
+        $translations->storeFromVrMenuController($data, $record);
+
         Session::flash('success', 'Was successfully save!');
 
-        return redirect()->route('app.menu.index', $config);
+        return redirect()->route('app.menu.index');
 
     }
 
@@ -83,7 +106,9 @@ class VrMenuController extends Controller
      */
     public function show($id)
     {
-        //
+        $config = [];
+        $config['item'] = VrMenu::find($id)->toArray();
+        return view('admin.menu.show', $config);
     }
 
     /**
@@ -96,8 +121,9 @@ class VrMenuController extends Controller
     public function edit($id)
     {
         $config['route'] = route('app.menu.edit', $id);
-        $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name','id')->toArray();
-        $config['menu'] = VrMenu::find($id)->toArray();
+        $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name', 'id')->toArray();
+        $config['ignore'] = ['menu_id', 'language_code'];
+        $config['menu'] = VrMenu::with(['translation'])->find($id)->toArray();
 
         return view('admin.menu.edit', $config);
     }
@@ -111,26 +137,28 @@ class VrMenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $config = VrMenu::find($id);
 
-        $this->validate($request, [
-            'name' => 'required|string|max:255|unique:vr_menu',
-            'url' => 'required|string|max:255|unique:vr_menu',
-            'sequence' => 'required|digits:1|unique:vr_menu',
-        ]);
+//        $this->validate($request, [
+//            'name' => 'required|string|max:255|unique:vr_menu',
+//            'url' => 'required|string|max:255|unique:vr_menu',
+//            'sequence' => 'required|digits:1|unique:vr_menu',
+//        ]);
 
         $data = request()->all();
-
-        $config->update(array(
-            'name' => $data['name'],
+        $record = VrMenu::find($id);
+        $record->update(array(
+            'name' => $data['name_lt'],
             'url' => $data['url'],
             'sequence' => $data['sequence'],
             'vr_parent_id' => $data['listParent']
         ));
 
+        $translations = new VrMenuTranslationsController();
+        $translations->updateFromVrMenuController($data, $id);
+
         Session::flash('success', 'Was successfully save!');
 
-        return redirect()->route('app.menu.index', $config);
+        return redirect()->route('app.menu.index', $record);
     }
 
     /**
@@ -144,17 +172,17 @@ class VrMenuController extends Controller
     {
 
         if (VrMenu::destroy($id)) {
-            return ["success" => true, "id" => $id];
+            return json_encode(["success" => true, "id" => $id]);
         }
     }
 
     private function listBladeData()
     {
         $config = [];
-        $config['show'] = 'app.orders.show';
-        $config['create'] = 'app.orders.create';
-        $config['delete'] = 'app.orders.destroy';
-        $config['edit'] = 'app.orders.edit';
+        $config['show'] = 'app.menu.show';
+        $config['create'] = 'app.menu.create';
+        $config['delete'] = 'app.menu.destroy';
+        $config['edit'] = 'app.menu.edit';
         return $config;
     }
 }
