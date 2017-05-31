@@ -19,10 +19,7 @@ class VrUsersController extends Controller
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = VrUsers::with(['orders'])->get()->toArray();
-//        if($config['list'] == null)
-//        {
-//            return redirect()->route('app.users.', $config);
-//        }
+
         return view('admin.listView', $config);
     }
 
@@ -36,7 +33,7 @@ class VrUsersController extends Controller
     {
         $config['users'] = VrUsers::get()->toArray();
         $config['route'] = 'app.users.create';
-        return view('admin.userEdit', $config);
+        return view('admin.users.userEdit', $config);
     }
 
     /**
@@ -56,7 +53,7 @@ class VrUsersController extends Controller
             'phone' => $data['phone'],
         ]);
 
-        return view('admin.userEdit');
+        return view('admin.users.userEdit');
     }
 
     /**
@@ -110,6 +107,7 @@ class VrUsersController extends Controller
     {
         //
     }
+
     private function listBladeData()
     {
         $config = [];
