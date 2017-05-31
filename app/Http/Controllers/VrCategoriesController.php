@@ -19,6 +19,10 @@ class VrCategoriesController extends Controller {
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = VrCategories::with(['translation'])->get()->toArray();
+        if($config['list'] == null )
+        {
+            return redirect()->route('app.categories.create', $config);
+        }
         $config['ignore'] = ['category_id', 'id'];
         return view('admin.listView', $config);
 	}
