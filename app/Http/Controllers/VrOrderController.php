@@ -81,13 +81,28 @@ class VrOrderController extends Controller {
         $config['time'] = $time;
 		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
 		$reservations = VrReservations::select('experience_id', 'time')->get()->toArray();
-//		foreach ($reservations as $reservation) {
-//            foreach ($reservation as $key => $item) {
-//                unset($item[$key]);
-//                $reservation[] = $item;
-//            }
-//        }
-//        dd($reservations);
+
+		$newArr = [];
+        foreach ($reservations as $key => $reservation) {
+            if(!in_array($reservation['experience_id'], $newArr)) {
+                array_push($newArr, $reservation['experience_id']);
+                }
+            }
+        $newArrKeys = array_flip($newArr);
+
+        foreach ($newArrKeys as $key1 => $item) {
+            $item = [];
+            foreach ($reservations as $key2 => $reservation) {
+                if($key1 == $reservation['experience_id']) {
+                    array_push($item, $reservation['time']);
+                }
+            }
+            $newArrKeys[$key1] = $item;
+        }
+
+        $config['checkRoomTimes'] = $newArrKeys;
+
+
 		return view ('frontEnd.createOrder', $config);
 
 	}

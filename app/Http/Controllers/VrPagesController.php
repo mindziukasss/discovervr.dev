@@ -54,7 +54,7 @@ class VrPagesController extends Controller {
 	{
 		$config['categories'] = VrCategoriesTranslations::where('language_code', '=', 'en')->pluck('name', 'category_id');
 
-		return view ('admin.pageCreate', $config);
+		return view ('admin.pages.pageCreate', $config);
 	}
 
 	/**
@@ -98,7 +98,7 @@ class VrPagesController extends Controller {
 	{
         $config['item'] = VrPages::with(['translation', 'category', 'resource'])->find($id)->toArray();
         $config['ignore'] = ['blede', 'meme'];
-        return view('admin.pageSingle', $config);
+        return view('admin.pages.pageSingle', $config);
 	}
 
 	/**
@@ -128,7 +128,7 @@ class VrPagesController extends Controller {
             'language_code'
         ];
 
-        return view ('admin.pageEdit', $config);
+        return view ('admin.pages.pageEdit', $config);
 	}
 
 	/**
