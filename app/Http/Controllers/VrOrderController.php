@@ -78,6 +78,14 @@ class VrOrderController extends Controller {
         $config['date'] = array_combine($date, $date);
         $config['time'] = $time;
 		$config['rooms'] = VrPages::with(['translation'])->where('category_id', '=', 'virtual-rooms')->pluck('id', 'id');
+		$reservations = VrReservations::select('experience_id', 'time')->get()->toArray();
+		foreach ($reservations as $reservation) {
+            foreach ($reservation as $key => $item) {
+                unset($item[$key]);
+                $reservation[] = $item;
+            }
+        }
+        dd($reservations);
 		return view ('frontEnd.createOrder', $config);
 
 	}
@@ -95,7 +103,7 @@ class VrOrderController extends Controller {
         foreach($data['room'] as $key => $room){
             $key = [];
             foreach($data[$room.'time'] as $time) {
-                array_push($key, $data['date'] . ' ' . $time);
+                array_push($key, $time);
             }
             $experience[$room] = $key;
         }
