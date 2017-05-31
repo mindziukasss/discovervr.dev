@@ -2,15 +2,19 @@
 @section('content')
     <div class="container">
 
+        <h2>{{ucfirst($tableName)}} table</h2>
 
-        <h2>{{ucfirst($tableName)}}s table</h2>
-        <a href="{{ route($create) }}">Create new {{$tableName}}</a>
+        @if(isset($create))
+            <a href="{{ route($create) }}">Create new {{$tableName}}</a>
+        @endif
+
         <table class="table table-bordered">
             <thead>
             <tr>
                 @foreach($list[0] as $key => $value)
                     <th>{{$key}}</th>
                 @endforeach
+                <th>orders</th>
                 <th>edit</th>
                 <th>show</th>
                 <th>delete</th>
@@ -39,6 +43,13 @@
                             @endif
                         </td>
                     @endforeach
+
+                    @if(isset($orders))
+                        <td><a href="{{ route($orders,$record['id']) }}">
+                                <button type="button" class="btn btn-primary">Orders</button>
+                            </a>
+                        </td>
+                    @endif
 
                     <td><a href="{{ route($edit,$record['id']) }}">
                             <button type="button" class="btn btn-primary">Edit</button>
