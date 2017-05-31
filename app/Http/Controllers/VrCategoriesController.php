@@ -6,11 +6,15 @@ use Ramsey\Uuid\Uuid;
 
 class VrCategoriesController extends Controller {
 
+
+
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /vrcategories
 	 *
 	 * @return Response
+     *
 	 */
 	public function index()
 	{
