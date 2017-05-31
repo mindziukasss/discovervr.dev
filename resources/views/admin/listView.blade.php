@@ -1,9 +1,8 @@
 @extends('base')
 @section('content')
+    {{--{{dd($list)}}--}}
     <div class="container">
-
         <h2>{{ucfirst($tableName)}} table</h2>
-
         @if(isset($create))
             <a href="{{ route($create) }}">Create new {{$tableName}}</a>
         @endif
@@ -14,7 +13,7 @@
                 @foreach($list[0] as $key => $value)
                     <th>{{$key}}</th>
                 @endforeach
-                <th>orders</th>
+
                 <th>edit</th>
                 <th>show</th>
                 <th>delete</th>
@@ -40,7 +39,16 @@
 
                                     @endif
                                 @endforeach
+                            @elseif($key == 'experiences');
+                                @foreach($value as $key => $experiences)
+                                    @foreach($experiences['pivot'] as $key => $time)
+                                        @if(!in_array($key, $ignore) )
+                                        <li>{{$time}}</li>
+                                        @endif
+                                    @endforeach
+                                @endforeach
                             @endif
+
                         </td>
                     @endforeach
 
