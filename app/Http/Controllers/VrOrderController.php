@@ -19,6 +19,8 @@ class VrOrderController extends Controller {
 	public function index()
 	{
 
+
+
 //        $dataFromModel = new VrOrder;
 //        $config = $this->listBladeData();
 //        $config['tableName'] = $dataFromModel->getTableName();
