@@ -14,6 +14,10 @@
 
 Auth::routes();
 
+Route::get('/test', function (){
+   return view('test');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', ['as' => 'app.menu.frontendIndex', 'uses' => 'VrMenuController@frontendIndex']);
