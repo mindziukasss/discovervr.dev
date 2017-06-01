@@ -88,6 +88,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
             Route::get('/edit', ['as' => 'app.users.edit', 'uses' => 'VrUsersController@edit']);
             Route::post('/edit', ['uses' => 'VrUsersController@update']);
             Route::delete('/delete', ['as' => 'app.users.destroy', 'uses' => 'VrUsersController@destroy']);
+
+            Route::get('/orders', ['as' => 'app.users.orders', 'uses' => 'VrUsersController@orderIndex']);
         });
     });
 });
