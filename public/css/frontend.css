@@ -1,0 +1,18 @@
+#menu, #menu ul li .dropdown-menu
+{
+    background-color: black;
+}
+#menu a
+{
+    color: white;
+}
+
+#menu a:hover, #menu a:focus, #menu ul .active a
+{
+    background-color: unset;
+    color: #fd7b30;
+}
+#menu ul .open a
+{
+    background-color: unset;
+}
