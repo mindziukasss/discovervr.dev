@@ -18,26 +18,14 @@ class VrOrderController extends Controller {
 	 */
 	public function index()
 	{
-
-
-
-//        $dataFromModel = new VrOrder;
-//        $config = $this->listBladeData();
-//        $config['tableName'] = $dataFromModel->getTableName();
-//        $config['list'] = $dataFromModel->with(['experiences'])->get()->toArray();
-//
-//		return view('admin.listView', $config);
-
-        $carbonForm = Carbon::createFromDate(2000, 04, 11, 'Europe/Vilnius');
-        echo $carbonForm;
-
-        $dates = [];
-
-        for($date = Carbon::now('Europe/Vilnius')->addHours(2)->minute(10)->second(0); $date->lte(Carbon::createFromTime(22, 00, 00, 'Europe/Vilnius')); $date->addMinutes(10)) {
-            $dates[] = $date->format('Y/m/d H:i:s');
-        }
-
-        dd($dates);
+        $dataFromModel = new VrOrder();
+        $config = $this->listBladeData();
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = $dataFromModel->with(['experiences'])->get()->toArray();
+        $config['ignore'] = ['experience_id', 'order_id'];
+        return view('admin.listView', $config);
+	    //return VrOrder::with(['user', 'experiences'])->get()->toArray();
+        dd($config);
 	}
 
 
@@ -145,7 +133,12 @@ class VrOrderController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+        $dataFromModel = new VrOrder();
+        $config = $this->listBladeData();
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = $dataFromModel->with(['experiences'])->find($id)->toArray();
+        $config['ignore'] = ['experience_id', 'order_id'];
+        return view('admin.orders.ordersSingle', $config);
 	}
 
 	/**
