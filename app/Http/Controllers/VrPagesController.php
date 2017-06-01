@@ -22,12 +22,13 @@ class VrPagesController extends Controller {
         $config = $this->listBladeData();
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = $dataFromModel->with(['translation', 'category', 'resource'])->get()->toArray();
+
         if($config['list'] == null )
         {
             return redirect()->route('app.pages.create', $config);
         }
         $config['ignore'] = ['id', 'page_id'];
-
+//        dd($config);
         return view('admin.listView', $config);
 	}
 
@@ -40,7 +41,7 @@ class VrPagesController extends Controller {
     public function indexFrontEndEn($slug)
     {
         $config['item'] = VrPagesTranslations::where('slug', '=', $slug)->get()->toArray();
-        dd($config);
+//        dd($config);
         return view ('frontEnd.pagesSingle', $config);
     }
 
@@ -53,6 +54,7 @@ class VrPagesController extends Controller {
 	public function create()
 	{
 		$config['categories'] = VrCategoriesTranslations::where('language_code', '=', 'en')->pluck('name', 'category_id');
+//		dd($config);
 
 		return view ('admin.pages.pageCreate', $config);
 	}
@@ -66,7 +68,7 @@ class VrPagesController extends Controller {
 	public function store()
 	{
         $resource = request()->file('image');
-        dd($resource);
+//        dd($resource);
         $uploadController = new VrResourcesController();
         $data = request()->all();
 
