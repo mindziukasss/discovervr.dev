@@ -133,7 +133,12 @@ class VrOrderController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+        $dataFromModel = new VrOrder();
+        $config = $this->listBladeData();
+        $config['tableName'] = $dataFromModel->getTableName();
+        $config['list'] = $dataFromModel->with(['experiences'])->find($id)->toArray();
+        $config['ignore'] = ['experience_id', 'order_id'];
+        return view('admin.orders.ordersSingle', $config);
 	}
 
 	/**
