@@ -5,7 +5,6 @@
     <title> bus meniu </title>
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     @include('frontEnd.css')
-
 </head>
 <body>
 

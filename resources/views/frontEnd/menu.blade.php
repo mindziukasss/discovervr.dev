@@ -1,26 +1,39 @@
 <div id="menu">
 
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
 
-<ul class="nav nav-pills">
-    <li role="presentation" > <a href="#"> Apie </a> </li>
-    <li role="presentation" > <a href="#"> Vieta ir laikas </a> </li>
-    <li role="presentation" > <a href="#"> Bilietai </a> </li>
-    <li role="presentation"> <a href="#"> Remejai </a> </li>
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Virtualūs kambariai <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li role="presentation" > <a href="#"> The Lab </a> </li>
-                <li role="presentation"> <a href="#"> Samsung irklavimas </a> </li>
-                <li role="presentation"> <a href="#"> Fruit nija </a> </li>
-                <li role="presentation"> <a href="#"> KTU parasparnis </a> </li>
-                <li role="presentation"> <a href="#"> Space pirate trainer </a> </li>
-            </ul>
-        </li>
-    </ul>
-</ul>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#"> Apie <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Bilietai</a></li>
+                    <li><a href="#">Vieta ir laikas</a></li>
+                    <li><a href="#">Remėjai</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Virtualūs kambariai <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">The Lab</a></li>
+                            <li><a href="#">Fruit nija</a></li>
+                            <li><a href="#">KTU parasparnis</a></li>
+                            <li><a href="#">Space pirate trainer</a></li>
+                            <li><a href="#">Samsung irklavimas</a></li>
+                        </ul>
+                    </li>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
 
 </div>
 {{--@foreach($list as $key => $record  )--}}
