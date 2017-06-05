@@ -16,7 +16,7 @@ class FrontEndController extends Controller {
         $dataFromModel = new VrMenu;
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = $dataFromModel->where('vr_parent_id', null)->with(['subCategory'])->get()->toArray();
-        return view('frontEnd.core', $config);
+        return view('frontEnd.homepage', $config);
 	}
 
 	/**

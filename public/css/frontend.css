@@ -1,4 +1,20 @@
-#menu, #menu ul li .dropdown-menu
+.navbar-default{
+    background-color: black;
+    border: none;
+    color: white;
+}
+
+/*.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {*/
+    /*background-color: unset;*/
+    /*color: white;*/
+/*}*/
+
+/*.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {*/
+    /*background-color: black;*/
+/*}*/
+
+
+#menu, #menu nav ul li .dropdown-menu
 {
     background-color: black;
 }
@@ -11,8 +27,64 @@
 {
     background-color: unset;
     color: #fd7b30;
+    border: none;
 }
 #menu ul .open a
 {
     background-color: unset;
 }
+
+.navbar-default .navbar-toggle:hover {
+    border-color: #fd7b30;
+    background-color: black;
+    color: #fd7b30;
+    font-size: 35px;
+
+}
+
+.navbar-default .navbar-toggle {
+
+    background-color: unset;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: unset;
+    border-color: #fd7b30;
+}
+
+
+#part-01{
+    background: url(../images/atrask.jpg) no-repeat center center;
+    height: 1225px;
+    width: 100%;
+    background-size: cover;
+    -webkit-transition: height 1s;
+}
+
+#menu
+{
+display: -webkit-flex;
+-webkit-justify-content: space-around;
+justify-content: space-around;
+position: fixed;
+width: 100%;
+}
+
+#red-flag{
+    width: 268px;
+    height: 326px;
+    background: url("../images/red.png") no-repeat;
+    margin: 0 auto;
+    background-position-y: -100px;
+}
+
+#logo{
+    width: 239px;
+    background: url("../images/partner-logo_elektromarkt 2.png") no-repeat center center;
+    margin: 0 auto;
+    padding-top: 210px;
+    background-size: contain;
+
+}
+
+

@@ -12,6 +12,7 @@
 
 <body>
     @include('frontEnd.menu')
+    @yield('content')
 
 </body>
 
