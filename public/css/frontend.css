@@ -1,36 +1,25 @@
-.navbar-default{
+.navbar-default {
     background-color: black;
     border: none;
     color: white;
 }
 
-/*.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {*/
-    /*background-color: unset;*/
-    /*color: white;*/
-/*}*/
 
-/*.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {*/
-    /*background-color: black;*/
-/*}*/
-
-
-#menu, #menu nav ul li .dropdown-menu
-{
+#menu, #menu nav ul li .dropdown-menu {
     background-color: black;
 }
-#menu a
-{
+
+#menu a {
     color: white;
 }
 
-#menu a:hover, #menu a:focus, #menu ul .active a
-{
+#menu a:hover, #menu a:focus, #menu ul .active a {
     background-color: unset;
     color: #fd7b30;
     border: none;
 }
-#menu ul .open a
-{
+
+#menu ul .open a {
     background-color: unset;
 }
 
@@ -52,8 +41,7 @@
     border-color: #fd7b30;
 }
 
-
-#part-01{
+#part-01 {
     background: url(../images/atrask.jpg) no-repeat center center;
     height: 1225px;
     width: 100%;
@@ -61,30 +49,57 @@
     -webkit-transition: height 1s;
 }
 
-#menu
-{
-display: -webkit-flex;
--webkit-justify-content: space-around;
-justify-content: space-around;
-position: fixed;
-width: 100%;
+#menu {
+    display: -webkit-flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 
-#red-flag{
+#red-flag {
     width: 268px;
-    height: 326px;
+    height: 226px;
     background: url("../images/red.png") no-repeat;
     margin: 0 auto;
     background-position-y: -100px;
 }
 
-#logo{
+#logo {
     width: 239px;
-    background: url("../images/partner-logo_elektromarkt 2.png") no-repeat center center;
-    margin: 0 auto;
-    padding-top: 210px;
+    height: 240px;
+    background: url("../images/partner-logo_elektromarkt 2.png") no-repeat;
     background-size: contain;
+    background-position-y: 130px;
+    color: #FF958B;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 100px;
+    margin: 0 auto;
 
 }
+
+#title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 10vw;
+    color: #f2f2f2;
+    text-align: center;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9, 1.2);
+    text-transform: uppercase;
+}
+
+#sentence {
+    text-align: center;
+    background-color: #fd7b30;
+    width: 405px;
+    margin: 0 auto;
+    color: white;
+    font-size: 16px;
+    padding-top: 7px;
+
+}
+
 
 

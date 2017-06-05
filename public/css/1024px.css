@@ -2,4 +2,16 @@
     body {
         background-color: lightgreen;
     }
+
+    #sentence {
+        text-align: center;
+        background-color: #fd7b30;
+        width: 405px;
+        margin: 0 auto;
+        color: white;
+        font-size: 16px;
+        padding-top: 7px;
+        -webkit-transition: height 1s;
+
+    }
 }
