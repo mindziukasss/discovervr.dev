@@ -138,6 +138,7 @@ ul.dropdown-menu {
     margin: 0 auto;
     width: 340px;
     margin-top: 50px;
+    -webkit-transition: margin-top 0.5s;
 }
 
 #title-page-text-block p {
