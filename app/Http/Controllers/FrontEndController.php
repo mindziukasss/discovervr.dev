@@ -11,7 +11,7 @@ class FrontEndController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($lang)
     {
         $dataFromModel = new VrMenu;
         $config['tableName'] = $dataFromModel->getTableName();
