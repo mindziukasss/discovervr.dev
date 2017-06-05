@@ -24,6 +24,15 @@
                             <li role="presentation"><a href="#">Messages</a></li>
                         </ul>
                     </li>
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            {{ trans('app.language') }} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li role="presentation"><a href="#">LT</a></li>
+                            <li role="presentation"><a href="#">EN</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

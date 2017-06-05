@@ -98,6 +98,7 @@
     color: white;
     font-size: 16px;
     padding-top: 7px;
+    -webkit-transition: margin-top 1s;
 
 }
 

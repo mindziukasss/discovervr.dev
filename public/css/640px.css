@@ -11,6 +11,8 @@
         padding-top: 7px;
         margin: 0 auto;
         margin-top: 440px;
+        -webkit-transition: margin-top 1s;
+
 
     }
 
