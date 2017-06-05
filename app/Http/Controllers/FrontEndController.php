@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VrLanguageCodes;
 use App\Models\VrMenu;
 use Illuminate\Routing\Controller;
 
@@ -11,9 +12,12 @@ class FrontEndController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($lang)
+	public function index()
     {
-        $dataFromModel = new VrMenu;
+        $set = setlocale()->aksf;la
+
+        $config['languages'] = VrLanguageCodes::select('language_code')->get()->toArray();
+        $dataFromModel = new VrMenuTranslations;
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = $dataFromModel->where('vr_parent_id', null)->with(['subCategory'])->get()->toArray();
 

@@ -33,8 +33,9 @@
                             <a id="dropdownMenu1" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="true" href="#">{{__('app.lang')}} <i class="fa fa-caret-down" aria-hidden="true"></i> </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">LT</a></li>
-                                <li><a href="#">EN</a></li>
+                                @foreach($languages as $language)
+                                <li><a href="{{$language['language_code']}}">{{strtoupper($language['language_code'])}}</a></li>
+                                @endforeach
                             </ul>
                     </li>
             </ul>
