@@ -26,6 +26,13 @@
                             <li><a href="#">Samsung irklavimas</a></li>
                         </ul>
                     </li>
+                    <li class="drop-language">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ trans('app.language') }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">LT</a></li>
+                            <li><a href="#">EN</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
