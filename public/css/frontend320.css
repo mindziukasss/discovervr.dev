@@ -25,4 +25,8 @@
     .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
         color: darkorange;
     }
+
+    #title-page-text-block {
+        margin-top: 200px;
+    }
 }

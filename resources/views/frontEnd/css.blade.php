@@ -3,4 +3,5 @@
 <link rel="stylesheet" href="{{ URL::asset('css/frontend.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/frontend320.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/frontend640.css') }}">
+<link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
 
