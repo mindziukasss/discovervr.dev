@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', ['as' => 'app.frontEnd.index', 'uses' => 'FrontEndController@index']);
 
 Route::get('/', function () {
-    return view('frontEnd.core');
+    return view('frontEnd.home');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']], function () {

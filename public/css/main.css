@@ -4,6 +4,7 @@
     color: white;
 }
 
+
 #menu .navbar-default {
     border: unset;
     display: -webkit-flex;
@@ -37,4 +38,57 @@
     body {
         background-color: #2ab27b;
     }
+}
+#menu ul .active a:hover {
+
+    color: #fd7b30;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #fd7b30;
+}
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: #151414;
+}
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: #151414;
+    border-color: #fd7b30;
+    color: #fd7b30;
+}
+.navbar-default .navbar-toggle {
+     color: white;
+ }
+
+#part-01
+{
+    background: url("../images/header-img.jpg") no-repeat center center;
+    height: 1255px;
+    width: 100%;
+    background-size: cover;
+    -webkit-transition: height 1s;
+
+}
+
+#red-flag
+{
+    width: 286px;
+    height: 326px;
+    background: url("../images/red flag 2.png") no-repeat;
+    margin: 0 auto;
+    background-position-y: -100px;
+}
+
+#logo
+{
+    width: 390px;
+    height: 48px;
+    background: url("../images/elektromarkt.png") no-repeat;
+    margin: 0 auto;
+    background-position-y: -100px;
+}
+
+#menu
+{
+    position: fixed;
+    width: 100%;
 }

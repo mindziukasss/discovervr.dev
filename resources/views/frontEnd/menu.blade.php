@@ -5,10 +5,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <i class="fa fa-bars" aria-hidden="true"></i>
                 </button>
             </div>
 
@@ -29,13 +26,15 @@
                             <li><a href="#">Samsung irklavimas</a></li>
                         </ul>
                     </li>
-
+                </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
 
-
 </div>
+
+
+
 {{--@foreach($list as $key => $record  )--}}
 
     {{--<div class="col-md-2 dropdown">--}}
