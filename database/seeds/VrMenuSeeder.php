@@ -13,7 +13,7 @@ class VrMenuSeeder extends Seeder
      */
     public function run()
     {
-        $categories = [
+        $menu = [
             ["id" => "about", "sequence" => "1"], //section describing concept of activity
             ["id" => "virtual-rooms", "sequence" => "2"], //separate rooms themes
             ["id" => "place-and-time", "sequence" => "3"], //location of place
@@ -32,10 +32,10 @@ class VrMenuSeeder extends Seeder
         ];
         DB::beginTransaction();
         try {
-            foreach ($categories as $category) {
-                $record = VrMenu::find($category['id']);
+            foreach ($menu as $item) {
+                $record = VrMenu::find($item['id']);
                 if (!$record) {
-                    VrMenu::create($category);
+                    VrMenu::create($item);
                 }
             }
         } catch (Exception $e) {
