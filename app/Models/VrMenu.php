@@ -20,14 +20,14 @@ class VrMenu extends CoreModel
 
 
 
-    public function subCategory()
+    public function translation()
     {
-        return $this->hasMany(VrMenu::class, 'vr_parent_id');
+        return $this->hasOne(VrMenuTranslations::class, 'menu_id', 'id')->where('language_code', '=', app()->getLocale());
     }
 
 
-    public function translation()
+    public function subCategory()
     {
-        return $this->belongsToMany(VrLanguageCodes::class, 'vr_menu_translations', 'menu_id', 'language_code' )->withPivot('name');
+        return $this->hasMany(VrMenu::class, 'vr_parent_id')->with('translation');
     }
 }
