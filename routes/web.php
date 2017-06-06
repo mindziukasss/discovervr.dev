@@ -19,15 +19,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/', ['as' => 'app.menu.frontendIndex', 'uses' => 'VrMenuController@frontendIndex']);
 
 
-
-Route::group(['prefix' => '{lang_id}'], function (){
-
-    Route::get('/', ['as' => 'app.frontEnd.index', 'uses' => 'FrontEndController@index']);
-});
-
-
-
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']], function () {
 
     Route::get('/', function () {
@@ -35,7 +26,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
     });
 
     Route::group(['prefix' => 'menu'], function () {
-
 
         Route::get('/', ['as' => 'app.menu.index', 'uses' => 'VrMenuController@index']);
         Route::get('/create', ['as' => 'app.menu.create', 'uses' => 'VrMenuController@create']);
@@ -103,3 +93,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
     });
 });
 
+Route::group(['prefix' => '{lang}', 'middleware' => ['language']], function (){
+
+    Route::get('/', ['as' => 'app.frontEnd.index', 'uses' => 'FrontEndController@index']);
+});
