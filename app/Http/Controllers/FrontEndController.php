@@ -11,14 +11,13 @@ class FrontEndController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($language)
+	public function index()
 	{
-	    app()->setLocale($language);
-
         $dataFromModel = new VrMenu ();
         $config['tableName'] = $dataFromModel->getTableName();
         $config['list'] = $dataFromModel->where('vr_parent_id', null)->with(['subCategory'])->get()->toArray();
-        return view('frontEnd.core', $config);
+
+        return view('frontEnd.home', $config);
 	}
 
 	/**
