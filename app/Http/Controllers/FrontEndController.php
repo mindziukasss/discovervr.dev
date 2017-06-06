@@ -4,6 +4,7 @@ use App\Models\VrLanguageCodes;
 use App\Models\VrMenu;
 use App\Models\VrMenuTranslations;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class FrontEndController extends Controller {
 
@@ -16,9 +17,9 @@ class FrontEndController extends Controller {
 	public function index()
     {
         $config['languages'] = VrLanguageCodes::select('language_code')->get()->toArray();
-        $dataFromModel = new VrMenuTranslations;
+        $dataFromModel = new VrMenu;
         $config['tableName'] = $dataFromModel->getTableName();
-        $config['list'] = $dataFromModel->where('vr_parent_id', null)->with(['subCategory'])->get()->toArray();
+        $config['list'] = $dataFromModel->where('vr_parent_id', null)->with(['subCategory', 'translation'])->get()->toArray();
 
         return view('frontEnd.home', $config);
 	}

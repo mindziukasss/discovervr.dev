@@ -9,7 +9,6 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -17,20 +16,23 @@
                     <li class="active">
                         @if(isset($record['sub_category']) && sizeof($record['sub_category']) > 0)
                             <a id="dropdownMenu1" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="true" href="{{$record['url'] }}"> {{$record['name']}} <i class="fa fa-caret-down" aria-hidden="true"></i> </a>
+                               aria-haspopup="true" aria-expanded="true" href="{{$record['translation']['url'] }}"> {{$record['translation']['name']}} <i class="fa fa-caret-down" aria-hidden="true"></i> </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 @foreach($record['sub_category'] as $key => $dropDown)
-                                    <li><a href=" {{$dropDown['url']}}"> {{$dropDown['name']}} </a></li>
+
+                                    <li><a href=" {{$dropDown['translation']['url']}}"> {{$dropDown['translation']['name']}} </a></li>
+
                                 @endforeach
                             </ul>
                         @else
-                            <a href=" {{$record['url'] }}"> {{$record['name']}} </a>
+                            <a href=" {{$record['translation']['url'] }}"> {{$record['translation']['name']}} </a>
                         @endif
+                        
                     </li>
                 @endforeach
                     <li class="active">
                             <a id="dropdownMenu1" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="true" href="#">{{__('app.lang')}} <i class="fa fa-caret-down" aria-hidden="true"></i> </a>
+                            aria-haspopup="true" aria-expanded="true" href="#">{{__('app.language')}} <i class="fa fa-caret-down" aria-hidden="true"></i> </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 @foreach($languages as $language)
                                 <li><a href="{{$language['language_code']}}">{{strtoupper($language['language_code'])}}</a></li>

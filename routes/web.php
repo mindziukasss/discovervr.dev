@@ -16,10 +16,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => '{lang?}'], function () {
-    Route::get('/frontend', ['as' => 'app.frontEnd.index', 'uses' => 'FrontEndController@index']);
-});
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']], function () {
 
     Route::get('/', function () {
