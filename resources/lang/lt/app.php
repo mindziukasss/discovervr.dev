@@ -1,9 +1,8 @@
 <?php
 
 return [
-    'exhibition' => 'Parodą įkvepia',
-    'discovervr' => 'ATRASK VR',
-    'call-to-action-1-line' => 'Pamatyk pasaulį kitomis akimis.',
-    'call-to-action-2-line' => 'Virtualios realybės patirčių paroda!',
-    'lang' => 'Kalba'
+    'inspired_by' => 'Parodą įkvepia:',
+    'discover_vr' => 'ATRASK VR',
+    'sentence' => 'Pamatyk pasaulį kitomis akimis. <br/>  Virtualios realybės patirčių paroda!',
+    'language' => 'Kalba'
 ];
