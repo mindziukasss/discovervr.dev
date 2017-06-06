@@ -16,7 +16,7 @@ class VrMenu extends CoreModel
      * Fillable column names
      * @var array
      */
-    protected $fillable = ['id', 'url', 'new_window', 'name', 'sequence', 'vr_parent_id'];
+    protected $fillable = ['id', 'new_window', 'sequence', 'vr_parent_id'];
 
 
 
