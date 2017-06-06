@@ -2,6 +2,7 @@
 
 use App\Models\VrLanguageCodes;
 use App\Models\VrMenu;
+use App\Models\VrMenuTranslations;
 use Illuminate\Routing\Controller;
 
 class FrontEndController extends Controller {
@@ -14,8 +15,6 @@ class FrontEndController extends Controller {
 	 */
 	public function index()
     {
-        $set = setlocale()->aksf;la
-
         $config['languages'] = VrLanguageCodes::select('language_code')->get()->toArray();
         $dataFromModel = new VrMenuTranslations;
         $config['tableName'] = $dataFromModel->getTableName();
