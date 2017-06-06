@@ -19,8 +19,8 @@ class VrMenuTranslationsSeeder extends Seeder
             ["id" => "virtual-roomsTransEn", "language_code" => "en", "url" => "/virtual-rooms", "name" => "Virtual rooms", "menu_id" => "virtual-rooms"],
             ["id" => "virtual-roomsTransLt", "language_code" => "lt", "url" => "/virtualus-kambariai", "name" => "Virtualus kambariai", "menu_id" => "virtual-rooms"],
 
-            ["id" => "virtual-roomsTrans-EnSwiming", "language_code" => "en", "url" => "/virtual-rooms/swiming", "name" => "Swiming", "menu_id" => "virtual-rooms"],
-            ["id" => "virtual-roomsTrans-LtSwiming", "language_code" => "lt", "url" => "/virtualus-kambariai/plaukimas", "name" => "Plaukimas", "menu_id" => "virtual-rooms"],
+            ["id" => "virtual-roomsTrans-EnSwiming", "language_code" => "en", "url" => "/virtual-rooms/swiming", "name" => "Swiming", "menu_id" => "swiming"],
+            ["id" => "virtual-roomsTrans-LtSwiming", "language_code" => "lt", "url" => "/virtualus-kambariai/plaukimas", "name" => "Plaukimas", "menu_id" => "swiming"],
 
             ["id" => "ticketsTransEn", "language_code" => "en",  "url" => "/tickets", "name" => "Tickests", "menu_id" => "tickets"],
             ["id" => "ticketsTransLt", "language_code" => "lt",  "url" => "/bilietai", "name" => "Bilietai", "menu_id" => "tickets"],
@@ -31,8 +31,8 @@ class VrMenuTranslationsSeeder extends Seeder
             ["id" => "sponsorsTransEn", "language_code" => "en", "url" => "/sponsors", "name" => "Sponsors", "menu_id" => "sponsors"],
             ["id" => "sponsorsTransLt", "language_code" => "lt", "url" => "/rėmėjai", "name" => "Rėmėjai", "menu_id" => "sponsors"],
 
-            ["id" => "sponsorsTransEnElekEn", "language_code" => "en", "url" => "/sponsors/elektromark", "name" => "Elektromark", "menu_id" => "sponsors"],
-            ["id" => "sponsorsTransLtElekLt", "language_code" => "lt", "url" => "/rėmėjai/elektromark", "name" => "Elektromark", "menu_id" => "sponsors"],
+            ["id" => "sponsorsTransEnElekEn", "language_code" => "en", "url" => "/sponsors/elektromark", "name" => "Elektromark", "menu_id" => "elektromark"],
+            ["id" => "sponsorsTransLtElekLt", "language_code" => "lt", "url" => "/rėmėjai/elektromark", "name" => "Elektromark", "menu_id" => "elektromark"],
 
 
         ];

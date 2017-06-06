@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VrMenuTranslations;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\VrMenu;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 
@@ -52,8 +54,8 @@ class VrMenuController extends Controller
     {
         $config['menu'] = VrMenu::get()->toArray();
         $config['route'] = 'app.menu.create';
-        $config['listParentIdNull'] = VrMenu::where('vr_parent_id', '=', null)->pluck('name', 'id')->toArray();
-
+        $config['listParentIdNull'] = DB::table('vr_menu')->join('vr_menu_translations', 'vr_menu.id', '=', 'vr_menu_translations.menu_id')
+        ->where('vr_parent_id', '=', null)->where('language_code', '=', 'lt')->get()->pluck('name', 'menu_id')->toArray();
         return view('admin.menu.create', $config);
     }
 
